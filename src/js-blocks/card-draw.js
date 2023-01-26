@@ -1,34 +1,36 @@
-const BASE_IMG_URL = "https://image.tmdb.org/t/p/origina";
+const BASE_IMG_URL = 'https://image.tmdb.org/t/p/origina';
 const DEFAULT_IMG_URL =
-  "https://images.prom.ua/211029177_w640_h640_211029177.jpg";
+  'https://images.prom.ua/211029177_w640_h640_211029177.jpg';
 
-const cardList = (data) => {
+const cardList = data => {
   const markup = data
-    .map((el) => {
+    .map(el => {
       return cardContainer(el);
     })
-    .join("");
+    .join('');
 
   galleryContainer.innerHTML = markup;
 };
 
-const cardContainer = ({ title, release_date, poster_path }) => {
-  const getImgUrl = (path) => {
+const cardContainer = ({ title, release_date, poster_path, vote_average }) => {
+  const getImgUrl = path => {
     return path ? `BASE_IMG_URL${poster_path}` : DEFAULT_IMG_URL;
   };
 
-  const getReleaseDate = (releaseDate) => {
+  const getReleaseDate = releaseDate => {
     return releaseDate
       ? new Date(release_date).getFullYear()
-      : "No information";
+      : 'No information';
   };
 
   const imgUrl = getImgUrl(poster_path);
   const releaseYear = getReleaseDate(release_date);
-  return renderCard(title, imgUrl, releaseYear);
+  const average = vote_average.slice(3);
+
+  return renderCard(title, imgUrl, releaseYear, average);
 };
 
-const renderCard = (title, img, date) => {
+const renderCard = (title, img, date, average) => {
   return `<div class="card-item">
         <a href="">
           <img class='card-img' src="${img}" alt="${title}">
@@ -36,5 +38,6 @@ const renderCard = (title, img, date) => {
         <p class="card-title">${title}</p>
         <p class="card-ganres"></p>
         <p class="card-release">${date}</p>
+        <p class="card-average">${average}</p>        
       </div>`;
 };

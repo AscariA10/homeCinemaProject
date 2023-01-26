@@ -1,0 +1,143 @@
+/* ------------------------common ------------------------*/
+body {
+  background-color: white;
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+button,
+a {
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+}
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gallery-container {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.card-title {
+  text-transform: uppercase;
+
+  margin-top: 32px;
+  margin-right: auto;
+
+  color: #000000;
+}
+
+.card-ganres,
+.card-year {
+  font-family: roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.16;
+}
+
+.card-average {
+  width: 40px;
+  height: 20px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  background: #ff6b08;
+}
+.card-year {
+  border-left: 1px solid orange;
+
+  color: #ff6b08;
+}
+
+.card-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  transition: scale cubic-bezier() 250;
+}
+
+.card-item :hover {
+  scale: 1.2;
+}
+
+.card-img {
+  border-radius: 5px;
+}
+
+.section {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+/* ------------------------common ------------------------*/
+
+/*------------------------ mobile ------------------------*/
+/* .card-title {
+    margin-top: 32px;
+} */
+
+.card-release {
+  margin-bottom: 20px;
+}
+.card-average::before {
+  width: 36px;
+  height: 16px;
+}
+.card-img {
+  width: 280;
+  height: 440px;
+}
+
+/*------------------------ mobile /*------------------------*/
+
+/*------------------------ tablet/*------------------------ */
+.card-img {
+  width: 336px;
+  height: 495px;
+}
+.card-average {
+  width: 36px;
+  height: 16px;
+}
+.section {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+/*------------------------ tablet/*------------------------ */
+/*------------------------ laptop/*------------------------ */
+.card-img {
+  width: 395px;
+  height: 634px;
+}
+
+.card-average {
+  width: 40px;
+  height: 20px;
+}
+
+/*------------------------ laptop/*------------------------ */
