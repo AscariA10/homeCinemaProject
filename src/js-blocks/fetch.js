@@ -17,7 +17,7 @@ export default class ApiMovies {
     this.page = number;
   }
   /** запит на список найпопулярніших фільмів  для створення колекції на головній сторінцi */
-  async fetchPopularMovies() {
+  async fetchTrendMovies() {
     try {
       const { data } = await axios.get(
         `/trending/movie/week?api_key=${this.API_KEY}&page=${this.page}`
@@ -41,7 +41,7 @@ export default class ApiMovies {
     }
   }
   /** запит повної інформації про кінофільм для сторінки кінофільму */
-  async fetchSingleMovie(filmId) {
+  async fetchMovieFullDetails(filmId) {
     try {
       const { data } = await axios.get(
         `movie/${filmId}?api_key=${this.API_KEY}&language=en-US`
@@ -52,7 +52,7 @@ export default class ApiMovies {
     }
   }
   /** запит повної інформації про можливий трейлер на YouTube*/
-  async fetchMovieTrailers(filmId) {
+  async fetchMovieTrailer(filmId) {
     try {
       const { data } = await axios.get(
         `movie/${filmId}/videos?api_key=${this.API_KEY}&language=en-US`
