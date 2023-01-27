@@ -1,0 +1,271 @@
+:root {
+    --light-color: #FFF;
+    --dark-color: #000;
+    --gray-color: #8C8C8C;
+    --active-btn-color: #FF6B01;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+ul,
+ol {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+body.show-modal .backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: initial;
+}
+
+body.show-modal .modal {
+    transform: scale(1);
+}
+
+.backdrop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--shadow-color);
+    z-index: 777;
+
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opasity 200ms ease-in-out, visibility 200ms ease-in-out;
+}
+
+.modal {
+    width: 100%; //не повлияло
+    background-color: var(--light-color);
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    color: var(--dark-color);
+    margin: 0 auto;
+
+    transform: scale(1.1);
+    transition: transform 200ms ease-in-out;
+}
+
+.modal_btn_close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 0;
+    line-height: 0;
+    width: 30px;
+    height: 30px;
+    //background-color: var(--light-color);
+}
+
+.modal_btn_close:hover,
+.modal_btn_close:focus {
+    border: 1px solid var(--dark-color);
+}
+
+.modal_icon_close {
+    height: 14px;
+    width: 14px;
+    fill: var(--dark-color);
+}
+
+.modal_img {
+    margin-bottom: 0;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px var(--shadow-color);
+}
+
+.modal_title {
+    font-size: 20px;
+    line-height: 1.15;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.modal_tbl {
+    table-layout: fixed;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.modal_tbl_left-side {
+    font-size: 12px;
+    line-height: 1.33;
+    color: var(--gray-color);
+}
+
+.modal_tbl_right_top {
+    font-size: 12px;
+    line-height: 1.17;
+}
+
+.modal_tbl_right_top.vote {
+    background-color: var(--active-btn-color);
+    border-radius: 5px;
+    text-align: center;
+    color: var(--light-color);
+}
+
+.modal_tbl_right_title {
+    font-size: 12px;
+    line-height: 1.33;
+    text-transform: uppercase;
+}
+
+.modal_tbl_right_genre {
+    font-size: 12px;
+    line-height: 1.33;
+}
+
+.modal_title_text {
+    font-size: 12px;
+    line-height: 1.33;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.modal_text {
+    font-size: 12px;
+    line-height: 1.67;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+.btn_list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn_choice {
+    height: 44px;
+    font-size: 12px;
+    line-height: 1.33;
+    text-transform: uppercase;
+    justify-content: center;
+    border-radius: 5px;
+    border: solid 1px var(--dark-color);
+    padding: 8px;
+}
+
+.btn_choice:hover,
+.btn_choice:focus {
+    background-color: var(--active-btn-color);
+    color: var(--light-color);
+    border: none;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/*mob*/
+@media screen and (max-width: 767px) {
+    .modal {
+        padding: 48px 20px 40px 20px;
+        max-width: 280px;
+    }
+
+    .modal_img {
+        width: 240px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+
+    }
+
+    .modal_description {
+        max-width: 240px;
+        margin: 0 auto;
+    }
+
+    .modal_text {
+        max-height: 236px;
+    }
+
+    .btn_choice {
+        width: 110px;
+    }
+}
+
+/*tab*/
+@media screen and (min-width: 768px) {
+    .modal {
+        padding: 40px 72px 40px 36px;
+        max-width: 704px;
+    }
+
+    .modal_img {
+        width: 264px;
+        height: 374px;
+        margin-right: 68px;
+    }
+
+    .modal_without_close-btn {
+        display: flex;
+    }
+
+    .modal_text {
+        max-height: 236px;
+    }
+
+    .btn_choice {
+        width: 125px;
+    }
+}
+
+/*deck*/
+@media screen and (min-width: 1200px) {
+    .modal {
+        padding: 40px 12px 40px 12px;
+        max-width: 806px;
+    }
+
+    .modal_img {
+        width: 375px;
+        height: 478px;
+        margin-right: 16px;
+    }
+
+    .modal_title {
+        font-size: 30px;
+        line-height: 1.17;
+    }
+
+    .modal_text {
+        max-height: 160px;
+    }
+
+    .btn_choice {
+        width: 136px;
+    }
+}
