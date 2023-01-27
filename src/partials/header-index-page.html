@@ -1,39 +1,43 @@
- <header class="header">
-      <!-- ------------------CONTAINER------------------- -->
-      <div class="header__container">
-        <!-- ------------------WRAPPER-------------------- -->
-        <div class="header__wrap">
-          <!-- ----------------LOGO--------------------- -->
-          <a href="./header-index-page.html" class="logo"
-            ><svg width="24" height="24">
-              <use href="./images/sprite.svg#icon-film"></use>
-              <span class="logo__name">Filmoteka</span>
-            </svg>
-          </a>
+<header class="header">
+  <!-- ------------------CONTAINER------------------- -->
+  <div class="container">
+    <!-- ------------------WRAPPER-------------------- -->
+    <div class="header__wrap">
+      <!-- -------------------NAVIGATION----------------- -->
+      <nav class="header__nav">
+        <!-- ----------------LOGO--------------------- -->
+        <a href="" class="header__nav--logo"
+          ><svg width="24" height="24">
+            <use href="./images/sprite.svg#icon-film"></use>
+            <span class="header__nav--name">Filmoteka</span>
+          </svg>
+        </a>
 
-          <!-- -------------------NAVIGATION----------------- -->
-          <nav class="nav">
-            <ul class="nav__list">
-              <li class="nav__item">
-                <a href="./header-index-page.html">Home</a>
-              </li>
-              <li class="nav__item">
-                <a href="./header-library-page.html">My Library</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <ul class="header__nav--list">
+          <li class="header__nav--item">
+            <a class="header__nav--link current" href="">Home</a>
+          </li>
+          <li class="header__nav--item">
+            <a class="header__nav--link" href="">My Library</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
-        <!-- ----------------SEARCH----------------- -->
-        <div class="search">
-          <div class="search__form">
-            <input class ="search__input" type="text" placeholder="Movie search" />
-            <button class="search__btn">
-              <svg  width="12" height="12">
-                <use href="./images/sprite.svg#icon-search"></use>
-              </svg>
-            </button>
-          </div>
-        </div>
+    <!-- ----------------SEARCH----------------- -->
+    <div class="header__search">
+      <div class="header__search--form">
+        <input
+          class="header__search--input"
+          type="text"
+          placeholder="Movie search"
+        />
+        <button class="header__search--btn">
+          <svg width="12" height="12">
+            <use href="./images/sprite.svg#icon-search"></use>
+          </svg>
+        </button>
       </div>
-    </header>
+    </div>
+  </div>
+</header>
