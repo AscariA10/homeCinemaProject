@@ -1,4 +1,9 @@
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/origina';
+import ApiMovies from './fetch';
+
+const galleryContainer = document.querySelector('.gallery-wrapper');
+const api = new ApiMovies();
+
+const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
 const DEFAULT_IMG_URL =
   'https://images.prom.ua/211029177_w640_h640_211029177.jpg';
 
@@ -14,7 +19,7 @@ const cardList = data => {
 
 const cardContainer = ({ title, release_date, poster_path, vote_average }) => {
   const getImgUrl = path => {
-    return path ? `BASE_IMG_URL${poster_path}` : DEFAULT_IMG_URL;
+    return path ? `${BASE_IMG_URL}${poster_path}` : DEFAULT_IMG_URL;
   };
 
   const getReleaseDate = releaseDate => {
@@ -25,7 +30,7 @@ const cardContainer = ({ title, release_date, poster_path, vote_average }) => {
 
   const imgUrl = getImgUrl(poster_path);
   const releaseYear = getReleaseDate(release_date);
-  const average = vote_average.slice(3);
+  const average = Math.round(vote_average);
 
   return renderCard(title, imgUrl, releaseYear, average);
 };
@@ -38,6 +43,14 @@ const renderCard = (title, img, date, average) => {
         <p class="card-title">${title}</p>
         <p class="card-ganres"></p>
         <p class="card-release">${date}</p>
-        <p class="card-average">${average}</p>        
-      </div>`;
+        <p class="card-average">${average}</p>
+        </div>`;
 };
+
+const render = async () => {
+  const response = await api.fetchTrendMovies();
+  console.log(response);
+  cardList(response);
+};
+
+render();
