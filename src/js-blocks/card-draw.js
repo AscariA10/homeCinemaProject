@@ -41,7 +41,7 @@ const renderCard = (title, img, date, average) => {
           <img class='card-img' src="${img}" alt="${title}">
         </a>
         <p class="card-title">${title}</p>
-        <p class="card-ganres"></p>
+        <p class="card-ganre"></p>
         <p class="card-release">${date}</p>
         <p class="card-average">${average}</p>
         </li>`;
