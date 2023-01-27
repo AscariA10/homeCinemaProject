@@ -1,9 +1,9 @@
 import ApiMovies from './fetch';
 
-const galleryContainer = document.querySelector('.gallery-wrapper');
+const galleryContainer = document.querySelector('.gallery-item');
 const api = new ApiMovies();
 
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original';
+const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const DEFAULT_IMG_URL =
   'https://images.prom.ua/211029177_w640_h640_211029177.jpg';
 
@@ -30,13 +30,13 @@ const cardContainer = ({ title, release_date, poster_path, vote_average }) => {
 
   const imgUrl = getImgUrl(poster_path);
   const releaseYear = getReleaseDate(release_date);
-  const average = Math.round(vote_average);
+  const average = vote_average.toFixed(2);
 
   return renderCard(title, imgUrl, releaseYear, average);
 };
 
 const renderCard = (title, img, date, average) => {
-  return `<div class="card-item">
+  return `<li class="gallery-card list">
         <a href="">
           <img class='card-img' src="${img}" alt="${title}">
         </a>
@@ -44,7 +44,7 @@ const renderCard = (title, img, date, average) => {
         <p class="card-ganres"></p>
         <p class="card-release">${date}</p>
         <p class="card-average">${average}</p>
-        </div>`;
+        </li>`;
 };
 
 const render = async () => {
