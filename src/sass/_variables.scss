@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.container {
+    margin: 0 auto;
+
+    @media screen and (min-width: 320px) {
+        width: 280px;
+        padding: 0 20px;
+    }
+
+    @media screen and (min-width: 768px) {
+        width: 704px;
+        padding: 0 32px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        width: 1200px;
+        padding: 0 32px;
+    }
+}
