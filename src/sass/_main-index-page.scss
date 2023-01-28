@@ -6,7 +6,6 @@ body {
   background-color: #e5e5e5;
   margin: 0;
   font-family: roboto;
-  font-family: roboto;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.16;
@@ -20,7 +19,7 @@ ul {
   padding: 0;
 }
 
-.link {
+a {
   text-decoration: none;
 }
 .container {
@@ -41,34 +40,60 @@ ul {
   width: 280px;
   height: 398px;
 }
-.gallery-card :hover {
-  transform: scale(1.1);
-  transition: transform 0.8s ease 0.2ms;
+.gallery-card {
+  height: 100%;
+}
+
+.card-link:hover,
+.card-link :focus {
+  display: block;
+
+  box-shadow: rgb(85, 91, 255, 0.8) 0px 0px 0px 3px,
+    rgb(31, 193, 27, 0.8) 0px 0px 0px 5px,
+    rgb(255, 217, 19, 0.8) 0px 0px 0px 7px,
+    rgb(255, 156, 85, 0.8) 0px 0px 0px 9px,
+    rgb(255, 85, 85, 0.8) 0px 0px 0px 11px;
+
+  transition: box-shadow 0.8s ease 0.2ms;
 }
 .card-title {
-  text-transform: uppercase;
   margin-bottom: 8px;
   margin-top: 8px;
   margin-right: auto;
 
+  text-transform: uppercase;
+  font-weight: 500;
   color: #000000;
 }
 
 .card-average {
-  width: 40px;
-  height: 20px;
+  width: 36px;
+  height: 16px;
   padding: 1px 6px;
   border-radius: 5px;
   font-size: 12px;
-  text-align: center;
+  margin-left: 10px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+
   color: #fff;
   background: #ff6b08;
 }
 
+.card-ganre {
+  margin-right: 10px;
+
+  color: #ff6b08;
+}
+.card-position {
+  display: flex;
+  align-items: baseline;
+}
+
 .card-release {
-  padding-left: 3px;
+  padding-left: 4px;
   border-left: 1px solid orange;
   color: #ff6b08;
 }
@@ -80,11 +105,6 @@ ul {
   line-height: 1.16;
 }
 
-.gallery-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-}
 .card-item {
   width: 280px;
   height: 438px;
@@ -92,8 +112,13 @@ ul {
 
 @media screen and (max-width: 767px) {
   .gallery-list {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+  }
+
+  .card-release {
+    margin-bottom: 20px;
   }
 }
 
@@ -107,6 +132,12 @@ ul {
   .card-average {
     width: 40px;
     height: 20px;
+  }
+
+  .gallery-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
   }
 
   .card-img {
