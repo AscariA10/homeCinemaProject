@@ -8,4 +8,5 @@ async function getGenres() {
     (acc, genre) => ({ ...acc, [genre.id]: genre.name }),
     []
   );
+  sessionStorage.setItem("genres", JSON.stringify(genres));
 }
