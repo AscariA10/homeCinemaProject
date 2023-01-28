@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e5e5e5;
+  margin: 0;
+  font-family: roboto;
+  font-family: roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.16;
+}
+
+img {
+  display: block;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.link {
+  text-decoration: none;
+}
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.section {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.card-img {
+  border-radius: 5px;
+  width: 280px;
+  height: 398px;
+}
+.gallery-card :hover {
+  transform: scale(1.1);
+  transition: transform 0.8s ease 0.2ms;
+}
+.card-title {
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-right: auto;
+
+  color: #000000;
+}
+
+.card-average {
+  width: 40px;
+  height: 20px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background: #ff6b08;
+}
+
+.card-release {
+  padding-left: 3px;
+  border-left: 1px solid orange;
+  color: #ff6b08;
+}
+
+.card-ganres,
+.card-release {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.16;
+}
+
+.gallery-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.card-item {
+  width: 280px;
+  height: 438px;
+}
+
+@media screen and (max-width: 767px) {
+  .gallery-list {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .card-average {
+    width: 40px;
+    height: 20px;
+  }
+
+  .card-img {
+    width: 336px;
+    height: 455px;
+  }
+
+  .section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .card-item {
+    width: calc((100% - 32px) / 2);
+    height: 495px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+  }
+  .card-img {
+    width: 394px;
+    height: 574px;
+  }
+  .gallery-wrapper {
+    width: 1216px;
+    gap: 16px;
+  }
+  .card-item {
+    width: calc((100% - 32px) / 3);
+    height: 634px;
+  }
+
+  .gallery-list {
+    gap: 16px;
+  }
+}

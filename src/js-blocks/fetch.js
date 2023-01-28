@@ -8,15 +8,15 @@ export default class ApiMovies {
       this.totalPages = 0;
       this.API_KEY = 'b446e42b934b4d3ae998459bb3b8c53d';
    }
-   /** возвращяет номер страници для пагинации */
+   /** Returns page number for pagination */
    get pageNumber() {
       return this.page;
    }
-   /** устанавливает номер страници если пользователь кликнет на номер стр в пагинации */
+   /** sets the page number if the user clicks on the page number in the pagination */
    set pageNumber(number) {
       this.page = number;
    }
-   /** запит на список найпопулярніших фільмів  для створення колекції на головній сторінцi */
+   /** request for a list of the most popular movies to create a collection on the home page */
    async fetchTrendMovies() {
       try {
          const { data } = await axios.get(
@@ -28,7 +28,7 @@ export default class ApiMovies {
          Notify.failure(error.message);
       }
    }
-   /** запит фільму за ключовим словом на головній сторінці */
+   /** request a movie by keyword on the main page */
    async searchMovieByName(searchValue) {
       try {
          const { data } = await axios.get(
@@ -40,7 +40,7 @@ export default class ApiMovies {
          Notify.failure(error.message);
       }
    }
-   /** запит повної інформації про кінофільм для сторінки кінофільму */
+   /** requesting full movie information for the movie page */
    async fetchMovieFullDetails(filmId) {
       try {
          const { data } = await axios.get(`movie/${filmId}?api_key=${this.API_KEY}&language=en-US`);
@@ -49,13 +49,24 @@ export default class ApiMovies {
          Notify.failure(error.message);
       }
    }
-   /** запит повної інформації про можливий трейлер на YouTube*/
+   /** requesting full information about a possible trailer on YouTube */
    async fetchMovieTrailer(filmId) {
       try {
          const { data } = await axios.get(
             `movie/${filmId}/videos?api_key=${this.API_KEY}&language=en-US`
          );
          return data.results;
+      } catch (error) {
+         Notify.failure(error.message);
+      }
+   }
+   /** fetchGenres - gets an array of all genres */
+   async fetchGenres() {
+      try {
+         const { data } = await axios.get(
+            `/genre/movie/list?api_key=${this.API_KEY}&language=en-US`
+         );
+         return data;
       } catch (error) {
          Notify.failure(error.message);
       }
