@@ -39,7 +39,7 @@ body.show-modal .backdrop {
     pointer-events: initial;
 }
 
-body.show-modal .modal {
+body.show-modal .modal_windowl {
     transform: scale(1);
 }
 
@@ -61,7 +61,7 @@ body.show-modal .modal {
     transition: opasity 200ms ease-in-out, visibility 200ms ease-in-out;
 }
 
-.modal {
+.modal_window {
     width: 100%; //не повлияло
     background-color: var(--light-color);
 
@@ -190,7 +190,7 @@ body.show-modal .modal {
 
 /*mob*/
 @media screen and (max-width: 767px) {
-    .modal {
+    .modal_window {
         padding: 48px 20px 40px 20px;
         max-width: 280px;
     }
@@ -219,7 +219,7 @@ body.show-modal .modal {
 
 /*tab*/
 @media screen and (min-width: 768px) {
-    .modal {
+    .modal_window {
         padding: 40px 72px 40px 36px;
         max-width: 704px;
     }
@@ -245,7 +245,7 @@ body.show-modal .modal {
 
 /*deck*/
 @media screen and (min-width: 1200px) {
-    .modal {
+    .modal_window {
         padding: 40px 12px 40px 12px;
         max-width: 806px;
     }

@@ -24,53 +24,52 @@ function onEscPress(evt){
     onCloseModal();
   }
 }
-// определение названия кнопки watch
-const watchBtnRef = document.querySelector('.but_watced');
-//if(!поле === Watched){
-watchBtnRef.insertAdjacentHTML("afterbegin", "<span class='add_watch'>add to Watched </span>");
-//}
-//else{
-//watchBtnRef.insertAdjacentHTML("afterbegin", "<span class='remove_watch'>remove from Watched </span>");
-//}
-const watchSpanEl = document.querySelector('.add_watch');
-const watchRemSpanEl = document.querySelector('.remove_watch');
-//смена названия кнопки watch
-watchBtnRef.addEventListener('click', onChangeTitleWatch);
+//заполнение модалки информацией
+const modalFillihg = document.querySelector('.modal_without_close-btn');
+openModal.addEventListener('click', onModalDataFilling);
 
-function onChangeTitleWatch() {
-  if (watchSpanEl) {
-    watchBtnRef.removeChild(watchBtnRef.firstChild);
-    watchBtnRef.insertAdjacentHTML("afterbegin", "<span class='remove_watch'>remove from Watched </span>");
+function onModalDataFilling() {
+  const modalData = JSON.parse(localStorage.getItem('key key key'));
+  if (modalData) {
+    for (let key in modalData) {
+      modalFillihg.element[key].value = modalData[key];//не уверена по element
+    }
   }
-  else {
-    watchBtnRef.removeChild(watchBtnRef.firstChild);
-    watchBtnRef.insertAdjacentHTML("afterbegin", "<span class='add_watch'>add to Watched </span>");
-  }
-  setTimeout(() => {
-    //вернуть цвет белий
-    //watchBtnRef.style.backgroundColor = "#FFF";
-  }, 2000);
 }
-// определение названия кнопки queue
-const queueBtnRef = document.querySelector('.but_queue');
-//if(!поле === Watched){
-//queueBtnRef.insertAdjacentHTML("afterbegin", "<span class='add_queue'>add to queue </span>");
-//}
-//else{
-queueBtnRef.insertAdjacentHTML("afterbegin", "<span class='remove_queue'>remove from queue </span>");
-//}
-const QueueSpanEl = document.querySelector('.add_queue');
-const remQueueSpanEl = document.querySelector('.remove_queue');
+//кнопки переключатели
+ //const LocalStorageEntry = new LocalStorageEntry(key);
+
+ 
+ 
+//смена названия кнопки watch
+ const watchBtnRef = document.querySelector('.btn_watched');
+ const watchSpanEl = document.querySelector('.change_watch');
+ watchBtnRef.addEventListener('click', onChangeTitleWatch);
+
+ function onChangeTitleWatch() {
+  //заменить проверку
+   if (watchSpanEl.textContent == "add to Watched") {
+     watchSpanEl.textContent = "remove from Watched";
+   }
+   else {
+     watchSpanEl.textContent = "add to Watched";
+   }
+   setTimeout(() => {
+     //вернуть цвет белий
+     //watchBtnRef.style.backgroundColor = "#FFF";
+   }, 2000);
+ }
 //смена названия кнопки queue
-queueBtnRef.addEventListener('click', onChangeTitleQueue);
+ const queueBtnRef = document.querySelector('.btn_queue');
+ const queueSpanEl = document.querySelector('.change_queue');
+ queueBtnRef.addEventListener('click', onChangeTitleQueue);
 
 function onChangeTitleQueue() {
-  if (QueueSpanEl) {
-    queueBtnRef.removeChild(queueBtnRef.firstChild);
-    queueBtnRef.insertAdjacentHTML("afterbegin", "<span class='remove_queue'>remove from queue </span>");
-  }
-  else {
-    queueBtnRef.removeChild(queueBtnRef.firstChild);
-    queueBtnRef.insertAdjacentHTML("afterbegin", "<span class='add_queue'>add to queue </span>");
-  }
-}
+   //заменить проверку
+   if (queueSpanEl.textContent == "add to queue") {
+    queueSpanEl.textContent = "remove from queue";
+   }
+   else {
+     queueSpanEl.textContent = "add to queue"
+   }
+ }
