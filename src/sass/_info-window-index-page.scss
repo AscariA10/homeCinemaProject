@@ -175,13 +175,11 @@ body.show-modal .modal_window {
     padding: 8px;
 }
 
-.btn_choice:hover,
-.btn_choice:focus {
+.btn_choice:hover {
     background-color: var(--active-btn-color);
     color: var(--light-color);
     border: none;
 }
-
 .hidden {
     opacity: 0;
     visibility: hidden;

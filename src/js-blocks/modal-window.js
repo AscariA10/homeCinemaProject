@@ -48,7 +48,6 @@ function onEscPress(evt){
  queueBtnRef.addEventListener('click', onChangeTitleQueue);
 
 function onChangeTitleQueue() {
-   //заменить проверку
    if (queueSpanEl.textContent == "add to queue") {
     queueSpanEl.textContent = "remove from queue";
    }
@@ -57,17 +56,7 @@ function onChangeTitleQueue() {
    }
  }
 //заполнение модалки информацией
-const modalFillihg = document.querySelector('.modal_without_close-btn');
-openModal.addEventListener('click', onModalDataFilling);
 
-function onModalDataFilling() {
-  const modalData = JSON.parse(localStorage.getItem('key key key'));
-  if (modalData) {
-    for (let key in modalData) {
-      modalFillihg.element[key].value = modalData[key];//не уверена по element
-    }
-  }
-}
 //кнопки переключатели
  //const LocalStorageEntry = new LocalStorageEntry(key);
 
