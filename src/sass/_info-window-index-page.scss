@@ -83,7 +83,8 @@ body.show-modal .modal_window {
     line-height: 0;
     width: 30px;
     height: 30px;
-    //background-color: var(--light-color);
+    background-color: var(--light-color);
+   
 }
 
 .modal_btn_close:hover,
@@ -92,8 +93,6 @@ body.show-modal .modal_window {
 }
 
 .modal_icon_close {
-    height: 14px;
-    width: 14px;
     fill: var(--dark-color);
 }
 

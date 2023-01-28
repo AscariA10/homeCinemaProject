@@ -24,6 +24,38 @@ function onEscPress(evt){
     onCloseModal();
   }
 }
+
+//смена названия кнопки watch
+ const watchBtnRef = document.querySelector('.btn_watched');
+ const watchSpanEl = document.querySelector('.change_watch');
+ watchSpanEl.addEventListener('click', onChangeTitleWatch);
+
+ function onChangeTitleWatch(evt) {
+    if (watchSpanEl.textContent == "add to Watched") {
+     watchSpanEl.textContent = "remove from Watched";
+   }
+   else {
+     watchSpanEl.textContent = "add to Watched";
+   }
+  //  setTimeout(() => {
+  //   watchBtnRef.style.cssText = 'backgroundColor: #fff; color: #000; border: 1px solid black';
+  //  }, 1000);
+
+   }
+//смена названия кнопки queue
+ const queueBtnRef = document.querySelector('.btn_queue');
+ const queueSpanEl = document.querySelector('.change_queue');
+ queueBtnRef.addEventListener('click', onChangeTitleQueue);
+
+function onChangeTitleQueue() {
+   //заменить проверку
+   if (queueSpanEl.textContent == "add to queue") {
+    queueSpanEl.textContent = "remove from queue";
+   }
+   else {
+     queueSpanEl.textContent = "add to queue"
+   }
+ }
 //заполнение модалки информацией
 const modalFillihg = document.querySelector('.modal_without_close-btn');
 openModal.addEventListener('click', onModalDataFilling);
@@ -40,36 +72,3 @@ function onModalDataFilling() {
  //const LocalStorageEntry = new LocalStorageEntry(key);
 
  
- 
-//смена названия кнопки watch
- const watchBtnRef = document.querySelector('.btn_watched');
- const watchSpanEl = document.querySelector('.change_watch');
- watchBtnRef.addEventListener('click', onChangeTitleWatch);
-
- function onChangeTitleWatch() {
-  //заменить проверку
-   if (watchSpanEl.textContent == "add to Watched") {
-     watchSpanEl.textContent = "remove from Watched";
-   }
-   else {
-     watchSpanEl.textContent = "add to Watched";
-   }
-   setTimeout(() => {
-     //вернуть цвет белий
-     //watchBtnRef.style.backgroundColor = "#FFF";
-   }, 2000);
- }
-//смена названия кнопки queue
- const queueBtnRef = document.querySelector('.btn_queue');
- const queueSpanEl = document.querySelector('.change_queue');
- queueBtnRef.addEventListener('click', onChangeTitleQueue);
-
-function onChangeTitleQueue() {
-   //заменить проверку
-   if (queueSpanEl.textContent == "add to queue") {
-    queueSpanEl.textContent = "remove from queue";
-   }
-   else {
-     queueSpanEl.textContent = "add to queue"
-   }
- }
