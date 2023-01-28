@@ -2,8 +2,8 @@ const paginationPagesList = document.querySelector('.js-pages-list');
 const paginationArrowPrev = document.querySelector('.js-prev-btn');
 const paginationArrowNext = document.querySelector('.js-next-btn');
 
-let page = 16;
-let totalPages = 1000;
+let page = 1;
+let totalPages = 11;
 
 paginationPagesList.addEventListener('click', onClick);
 paginationArrowPrev.addEventListener('click', onPrev);
@@ -23,6 +23,10 @@ function onClick(event) {
   const classes = [...event.target.classList];
   if (classes.includes('pagination__dots')) return;
   if (classes.includes('pagination__list')) return;
+  if (classes.includes('pagination__number_current')) return;
+
+  page = Number(event.target.innerText);
+  createPagination(page, totalPages);
 }
 
 function createPagination(page, totalPages) {
@@ -49,14 +53,14 @@ function createPagination(page, totalPages) {
     paginationArrowPrev.classList.add('visually-hidden');
   }
 
-  if (page > 3) {
+  if (page >= 4) {
     markup += `<li>
         <button type="button" class="pagination__item pagination__number">
           1
         </button>
       </li>`;
 
-    if (page > 4) {
+    if (page >= 5) {
       markup += `<li class="pagination__item pagination__dots">...</li>`;
     }
   }
@@ -80,8 +84,8 @@ function createPagination(page, totalPages) {
       </li>`;
   }
 
-  if (page < totalPages - 2) {
-    if (page < totalPages - 3) {
+  if (page <= totalPages - 3) {
+    if (page <= totalPages - 4) {
       markup += `<li class="pagination__item pagination__dots">...</li>`;
     }
 
