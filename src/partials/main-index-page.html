@@ -3,4 +3,30 @@
     <ul class="gallery-list"></ul>
     <!-- card render -->
   </div>
+
+  <div class="pagination">
+    <ul class="pagination__list">
+      <li>
+        <button
+          type="button"
+          class="pagination__item pagination__nav-btn pagination__nav-btn_left js-prev-btn visually-hidden"
+        >
+          <svg class="pagination__icon">
+            <use href="./images/sprite.svg#pagination-arrow"></use>
+          </svg>
+        </button>
+      </li>
+      <div class="pagination__list js-pages-list"></div>
+      <li>
+        <button
+          type="button"
+          class="pagination__item pagination__nav-btn pagination__nav-btn_right js-next-btn visually-hidden"
+        >
+          <svg class="pagination__icon">
+            <use href="./images/sprite.svg#pagination-arrow"></use>
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </div>
 </section>

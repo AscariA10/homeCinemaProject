@@ -25,34 +25,50 @@ function onEscPress(evt) {
    }
 }
 
-//смена названия кнопки watch
+//фильм1 для теста
+const movie = {
+   theme: 'dark',
+   isAuthenticated: true,
+   options: [1, 2, 3],
+};
+const movie222 = {
+   theme: 'dark',
+   isAuthenticated: true,
+   options: [1, 2, 3],
+};
+//watch
 const watchBtnRef = document.querySelector('.btn_watched');
 const watchSpanEl = document.querySelector('.change_watch');
-watchSpanEl.addEventListener('click', onChangeTitleWatch);
+watchBtnRef.addEventListener('click', onChangeTitleWatch);
 
-function onChangeTitleWatch(evt) {
+import { LocalStorageEntry } from './localStorageEntry';
+const watch = new LocalStorageEntry('Watch');
+watch.updateLocalStorageEntry();
+
+function onChangeTitleWatch() {
    if (watchSpanEl.textContent == 'add to Watched') {
       watchSpanEl.textContent = 'remove from Watched';
+      watch.addMovieToLocalStorage(movie);
+      //watch.addMovieToLocalStorage(movie222);
    } else {
       watchSpanEl.textContent = 'add to Watched';
+      watch.deleteMovieFromLocalStorage(movie);
    }
-   //  setTimeout(() => {
-   //   watchBtnRef.style.cssText = 'backgroundColor: #fff; color: #000; border: 1px solid black';
-   //  }, 1000);
 }
-//смена названия кнопки queue
+// queue
 const queueBtnRef = document.querySelector('.btn_queue');
 const queueSpanEl = document.querySelector('.change_queue');
 queueBtnRef.addEventListener('click', onChangeTitleQueue);
 
+const queue = new LocalStorageEntry('Queue');
+queue.updateLocalStorageEntry();
+
 function onChangeTitleQueue() {
    if (queueSpanEl.textContent == 'add to queue') {
       queueSpanEl.textContent = 'remove from queue';
+      queue.addMovieToLocalStorage(movie);
    } else {
       queueSpanEl.textContent = 'add to queue';
+      queue.deleteMovieFromLocalStorage(movie);
    }
 }
-//заполнение модалки информацией
-
-//кнопки переключатели
-//const LocalStorageEntry = new LocalStorageEntry(key);
