@@ -19,37 +19,42 @@ export default class Pagination {
     this.#createPagination(this.page, this.totalPages);
   }
 
-  #onPrev = async event => {
+  setFunction = async (fn, ...arrOfArgs) => {
+    this.fn = fn.bind(...arrOfArgs);
+    this.#render();
+  };
+
+  #onPrev = event => {
     this.page--;
-    this.render();
+    this.#render();
     this.#createPagination(this.page, this.totalPages);
     this.#onTop();
   };
 
-  #onNext = async event => {
+  #onNext = event => {
     this.page++;
-    this.render();
+    this.#render();
     this.#createPagination(this.page, this.totalPages);
     this.#onTop();
   };
 
-  #onClick = async event => {
+  #onClick = event => {
     this.classes = [...event.target.classList];
     if (this.classes.includes('pagination__dots')) return;
     if (this.classes.includes('pagination__list')) return;
     if (this.classes.includes('pagination__number_current')) return;
 
     this.page = Number(event.target.innerText);
-    this.render();
+    this.#render();
     this.#createPagination(this.page, this.totalPages);
     this.#onTop();
   };
 
-  async render() {
+  #render = async () => {
     api.pageNumber = this.page;
-    const res = await api.fetchTrendMovies();
+    const res = await this.fn();
     cardList(res);
-  }
+  };
 
   #onTop() {
     document.body.scrollTop = 0;
@@ -133,7 +138,15 @@ export default class Pagination {
   }
 }
 
-(async function fetching() {
+(async function (movieName = 'Avatar') {
+  // code for fetching trend movies and creating pagination
   await api.fetchTrendMovies();
   const pagination = new Pagination(api.pageNumber, api.totalPagesNumber);
+  pagination.setFunction(api.fetchTrendMovies, api);
+  //
+  // // code for fetching requested movies and creating pagination
+  // await api.searchMovieByName(movieName);
+  // api.pageNumber = 1;
+  // const pagination = new Pagination(api.pageNumber, api.totalPagesNumber);
+  // pagination.setFunction(api.searchMovieByName, api, movieName);
 })();
