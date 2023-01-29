@@ -55,10 +55,12 @@ export const renderCard = (title, img, date, average, id) => {
   </li>`;
 };
 
-export const render = async () => {
-  const response = await api.fetchTrendMovies();
-  console.log(response);
-  cardList(response);
-};
 
-render();
+// const render = async () => {
+//   const response = await api.fetchTrendMovies();
+//   console.log(response);
+//   cardList(response);
+// };
+
+
+// render();
