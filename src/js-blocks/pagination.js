@@ -1,7 +1,12 @@
 // do not remove this import
 import { cardList } from './card-draw.js';
 
+// To create a pagination you have to create an instance of class Pagination
+// and call setFunction method with relevant arguments
 export default class Pagination {
+  /** First param - current page of pagination
+   * Second param - total count of pages
+   */
   constructor(page, totalPages) {
     this.page = page;
     this.totalPages = totalPages;
@@ -17,6 +22,10 @@ export default class Pagination {
     this.#createPagination(this.page, this.totalPages);
   }
 
+  /** First param - link to requested function
+   * Second param - link to instance of reauested function
+   * Third and further params - args of requested function
+   */
   setFunction = async (fn, ...arrOfArgs) => {
     this.fn = fn.bind(...arrOfArgs);
     this.linkToIntance = arrOfArgs[0];
