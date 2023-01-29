@@ -1,3 +1,8 @@
+import { cardList } from './card-draw.js';
+
+import ApiMovies from './fetch.js';
+const api = new ApiMovies();
+
 export default class Pagination {
   constructor(page, totalPages) {
     this.page = page;
@@ -7,34 +12,51 @@ export default class Pagination {
     this.paginationArrowPrev = document.querySelector('.js-prev-btn');
     this.paginationArrowNext = document.querySelector('.js-next-btn');
 
-    this.paginationPagesList.addEventListener('click', this.onClick);
-    this.paginationArrowPrev.addEventListener('click', this.onPrev);
-    this.paginationArrowNext.addEventListener('click', this.onNext);
+    this.paginationPagesList.addEventListener('click', this.#onClick);
+    this.paginationArrowPrev.addEventListener('click', this.#onPrev);
+    this.paginationArrowNext.addEventListener('click', this.#onNext);
 
-    this.createPagination(this.page, this.totalPages);
+    this.#createPagination(this.page, this.totalPages);
   }
 
-  onPrev = event => {
+  #onPrev = async event => {
     this.page--;
-    this.createPagination(this.page, this.totalPages);
+    this.render();
+    this.#createPagination(this.page, this.totalPages);
+    this.#onTop();
   };
 
-  onNext = event => {
+  #onNext = async event => {
     this.page++;
-    this.createPagination(this.page, this.totalPages);
+    this.render();
+    this.#createPagination(this.page, this.totalPages);
+    this.#onTop();
   };
 
-  onClick = event => {
+  #onClick = async event => {
     this.classes = [...event.target.classList];
     if (this.classes.includes('pagination__dots')) return;
     if (this.classes.includes('pagination__list')) return;
     if (this.classes.includes('pagination__number_current')) return;
 
     this.page = Number(event.target.innerText);
-    this.createPagination(this.page, this.totalPages);
+    this.render();
+    this.#createPagination(this.page, this.totalPages);
+    this.#onTop();
   };
 
-  createPagination(page, totalPages) {
+  async render() {
+    api.pageNumber = this.page;
+    const res = await api.fetchTrendMovies();
+    cardList(res);
+  }
+
+  #onTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  #createPagination(page, totalPages) {
     let markup = '';
 
     let beforeCurr = page - 2;
@@ -110,3 +132,8 @@ export default class Pagination {
     this.paginationPagesList.innerHTML = markup;
   }
 }
+
+(async function fetching() {
+  await api.fetchTrendMovies();
+  const pagination = new Pagination(api.pageNumber, api.totalPagesNumber);
+})();
