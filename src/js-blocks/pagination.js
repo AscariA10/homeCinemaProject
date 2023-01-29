@@ -24,6 +24,7 @@ export default class Pagination {
 
   /** First param - link to requested function
    * Second param - link to instance of reauested function
+   * (instance has to be with setter named "pageNumber" to set current page)
    * Third and further params - args of requested function
    */
   setFunction = async (fn, ...arrOfArgs) => {
