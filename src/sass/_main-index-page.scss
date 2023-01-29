@@ -356,63 +356,6 @@ ul {
   height: 438px;
 }
 
-@media screen and (max-width: 767px) {
-  .gallery-list {
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .container {
-    width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
-  .card-average {
-    width: 40px;
-    height: 20px;
-  }
-
-  .card-img {
-    width: 336px;
-    height: 455px;
-  }
-
-  .section {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-
-  .card-item {
-    width: calc((100% - 32px) / 2);
-    height: 495px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .container {
-    width: 1280px;
-  }
-  .card-img {
-    width: 394px;
-    height: 574px;
-  }
-  .gallery-wrapper {
-    width: 1216px;
-    gap: 16px;
-  }
-  .card-item {
-    width: calc((100% - 32px) / 3);
-    height: 634px;
-  }
-
-  .gallery-list {
-    gap: 16px;
-  }
-}
-
 .pagination {
   width: 100%;
   display: flex;
@@ -434,7 +377,7 @@ ul {
   align-items: center;
   border: none;
   background-color: inherit;
-  padding: 0 16px;
+  padding: 0 8px;
 }
 
 .pagination__nav-btn {
@@ -480,12 +423,74 @@ ul {
 }
 
 .pagination__number_current {
+  min-width: 40px;
   background-color: var(--active-btn-color);
   color: #fff;
   border-radius: 5px;
   cursor: default;
 }
 
-.pagination__dots {
-  cursor: default;
+@media screen and (max-width: 767px) {
+  .gallery-list {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .except-mobile {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .card-average {
+    width: 40px;
+    height: 20px;
+  }
+
+  .card-img {
+    width: 336px;
+    height: 455px;
+  }
+
+  .section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .card-item {
+    width: calc((100% - 32px) / 2);
+    height: 495px;
+  }
+
+  .pagination__dots {
+    cursor: default;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+  }
+  .card-img {
+    width: 394px;
+    height: 574px;
+  }
+  .gallery-wrapper {
+    width: 1216px;
+    gap: 16px;
+  }
+  .card-item {
+    width: calc((100% - 32px) / 3);
+    height: 634px;
+  }
+
+  .gallery-list {
+    gap: 16px;
+  }
 }

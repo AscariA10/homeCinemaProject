@@ -82,13 +82,13 @@ export default class Pagination {
 
     if (page >= 4) {
       markup += `<li>
-        <button type="button" class="pagination__item pagination__number">
+        <button type="button" class="pagination__item pagination__number except-mobile">
           1
         </button>
       </li>`;
 
       if (page >= 5) {
-        markup += `<li class="pagination__item pagination__dots">...</li>`;
+        markup += `<li class="pagination__item pagination__dots except-mobile">...</li>`;
       }
     }
 
@@ -113,11 +113,11 @@ export default class Pagination {
 
     if (page <= totalPages - 3) {
       if (page <= totalPages - 4) {
-        markup += `<li class="pagination__item pagination__dots">...</li>`;
+        markup += `<li class="pagination__item pagination__dots except-mobile">...</li>`;
       }
 
       markup += `<li>
-        <button type="button" class="pagination__item pagination__number">
+        <button type="button" class="pagination__item pagination__number except-mobile">
           ${totalPages}
         </button>
       </li>`;
