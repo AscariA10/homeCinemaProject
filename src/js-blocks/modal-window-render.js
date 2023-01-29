@@ -12,14 +12,14 @@ refs.filmList.addEventListener('click', onFilmCardClick);
 
 async function onFilmCardClick(e) {
   e.preventDefault();
-  /**  поиск бижайшего предка с классом .gallery-card и получаем из него id */
+  /**  search for the nearest ancestor with the class .gallery-card and get the id from it */
   const filmId = e.target.closest('.gallery-card').dataset.id;
   if (filmId) {
-    /**  делаем запроc за одним фильмом по id  */
+    /**  query for a single movie by id  */
     const filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
-    /**  создание разметки для модаоьного окна  */
+    /**  Creating the markup for the modal window  */
     const markup = ceateModalMarkup(filmData);
-    /**  рендер модального окна  */
+    /**  Modal window renderer  */
     renderModal(markup, refs.modalFilm);
     openModal();
   }
@@ -147,11 +147,11 @@ function onEscPress(evt) {
     clearModal(refs.modalFilm);
   }
 }
-/** этот метод рендерит разметку модального окна в <div id="modal-single-film"></div>   */
+/** this method renders the layout of the modal window in <div id="modal-single-film"></div>   */
 function renderModal(markup, renderParrent) {
   renderParrent.insertAdjacentHTML('beforeend', markup);
 }
-/** этот метод удаляет разметку модального окна из <div id="modal-single-film"></div>  */
+/** this method removes the modal window markup from the <div id="modal-single-film"></div>  */
 function clearModal(rootModal) {
   rootModal.innerHTML = '';
 }
