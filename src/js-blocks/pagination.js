@@ -1,9 +1,6 @@
 // do not remove this import
 import { cardList } from './card-draw.js';
 
-import ApiMovies from './fetch.js';
-const api = new ApiMovies();
-
 export default class Pagination {
   constructor(page, totalPages) {
     this.page = page;
@@ -22,6 +19,7 @@ export default class Pagination {
 
   setFunction = async (fn, ...arrOfArgs) => {
     this.fn = fn.bind(...arrOfArgs);
+    this.linkToIntance = arrOfArgs[0];
     this.#render();
   };
 
@@ -52,7 +50,7 @@ export default class Pagination {
   };
 
   #render = async () => {
-    api.pageNumber = this.page;
+    this.linkToIntance.pageNumber = this.page;
     const res = await this.fn();
     cardList(res);
   };
@@ -139,6 +137,10 @@ export default class Pagination {
   }
 }
 
+import ApiMovies from './fetch.js';
+const api = new ApiMovies();
+
+//comment unneccessary code block
 (async function (movieName = 'Avatar') {
   // code for fetching trend movies and creating pagination
   await api.fetchTrendMovies();
