@@ -17,10 +17,14 @@ img {
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 a {
   text-decoration: none;
+}
+p {
+  margin: 0;
 }
 .container {
   margin-left: auto;
@@ -44,18 +48,23 @@ a {
   height: 100%;
 }
 
+.card-link {
+  display: block;
+  transition: box-shadow 0.8s ease 0.2ms, background-color 0.8s ease 0.8ms;
+  margin-bottom: 20px;
+}
 .card-link:hover,
 .card-link :focus {
   display: block;
+  background-color: rgb(255, 156, 85, 0.1);
 
   box-shadow: rgb(85, 91, 255, 0.8) 0px 0px 0px 3px,
     rgb(31, 193, 27, 0.8) 0px 0px 0px 5px,
     rgb(255, 217, 19, 0.8) 0px 0px 0px 7px,
     rgb(255, 156, 85, 0.8) 0px 0px 0px 9px,
     rgb(255, 85, 85, 0.8) 0px 0px 0px 11px;
-
-  transition: box-shadow 0.8s ease 0.2ms;
 }
+
 .card-title {
   margin-bottom: 8px;
   margin-top: 8px;
