@@ -44,6 +44,7 @@ export const renderCard = (title, img, date, average) => {
   return `<li class="gallery-card list">
         <a href="">
           <img class='card-img' src="${img}" alt="${title}">
+          <button type="button" class="trailer-btn">TRAILER</button>
         </a>
         <p class="card-title">${title}</p>
         <p class="card-ganre"></p>

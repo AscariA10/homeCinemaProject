@@ -41,6 +41,8 @@ ul {
   width: 280px;
   height: 398px;
 }
+
+
 .gallery-card :hover {
   transform: scale(1.1);
   transition: transform 0.8s ease 0.2ms;
@@ -88,6 +90,17 @@ ul {
 .card-item {
   width: 280px;
   height: 438px;
+}
+
+.trailer-btn {
+  width: 40%;
+  height: 30px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #4c479b;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s linear;
 }
 
 @media screen and (max-width: 767px) {
