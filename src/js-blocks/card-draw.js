@@ -22,6 +22,7 @@ export const cardContainer = ({
   release_date,
   poster_path,
   vote_average,
+  id,
 }) => {
   const getImgUrl = path => {
     return path ? `${BASE_IMG_URL}${poster_path}` : DEFAULT_IMG_URL;
@@ -35,27 +36,31 @@ export const cardContainer = ({
 
   const imgUrl = getImgUrl(poster_path);
   const releaseYear = getReleaseDate(release_date);
-  const average = vote_average.toFixed(2);
+  const average = vote_average.toFixed(1);
 
-  return renderCard(title, imgUrl, releaseYear, average);
+  return renderCard(title, imgUrl, releaseYear, average, id);
 };
 
-export const renderCard = (title, img, date, average) => {
-  return `<li class="gallery-card list">
-        <a href="">
-          <img class='card-img' src="${img}" alt="${title}">
-        </a>
-        <p class="card-title">${title}</p>
-        <p class="card-ganre"></p>
-        <p class="card-release">${date}</p>
-        <p class="card-average">${average}</p>
-        </li>`;
+export const renderCard = (title, img, date, average, id) => {
+  return `<li class="gallery-card list" data-id=${id}>
+    <a class='card-link' href="">    
+        <img class='card-img' src="${img}" alt="${title}">
+        <p class="card-title">${title}</p>      
+        <div class="card-position">
+          <p class="card-ganre"> TEST</p>
+          <p class="card-release">${date}</p>
+          <p class="card-average">${average}</p>
+        </div>
+    </a>
+  </li>`;
 };
 
-const render = async () => {
-  const response = await api.fetchTrendMovies();
-  console.log(response);
-  cardList(response);
-};
 
-render();
+// const render = async () => {
+//   const response = await api.fetchTrendMovies();
+//   console.log(response);
+//   cardList(response);
+// };
+
+
+// render();
