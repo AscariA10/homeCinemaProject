@@ -4,6 +4,7 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
 export default class ApiMovies {
   constructor() {
+    this.searchQuery = '';
     this.page = 1;
     this.totalPages = 0;
     this.API_KEY = 'b446e42b934b4d3ae998459bb3b8c53d';
@@ -47,11 +48,13 @@ export default class ApiMovies {
     }
   }
   /** request a movie by keyword on the main page */
+
   async searchMovieByName(searchValue) {
     this.showLoader();
+
     try {
       const { data } = await axios.get(
-        `search/movie?api_key=${this.API_KEY}&language=en-US&query=${searchValue}&page=${this.page}&include_adult=false`
+        `search/movie?api_key=${this.API_KEY}&language=en-US&query=${this.searchValue}&page=${this.page}&include_adult=false`
       );
       this.totalPages = data.total_pages;
       return data.results;

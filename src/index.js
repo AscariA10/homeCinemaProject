@@ -5,21 +5,14 @@ import { LocalStorageEntry } from './js-blocks/localStorageEntry.js';
 
 /**class declaration */
 const apiMovies = new ApiMovies();
-const pagination = new Pagination();
+// const pagination = new Pagination();
 
 /**Local Storage Initialisation */
 
-const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
-const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage');
 const currentPageMovies = new LocalStorageEntry('currentPageMovies');
 const firstPageTrendMovies = new LocalStorageEntry('firstPageTrendMovies');
 
-queueMoviesStorage.addMovieToLocalStorage('sonic');
-watchedMoviesStorage.addMovieToLocalStorage('avatar');
-currentPageMovies.addFilmsToLocalStorage(['qwe']);
-firstPageTrendMovies.addFilmsToLocalStorage([1, 2, 3, 4, 5, 6, 7, 7, 8]);
+import './js-blocks/input-search';
+import './js-blocks/modal-window-render.js';
 
-console.log(queueMoviesStorage);
-console.log(watchedMoviesStorage);
-console.log(currentPageMovies);
-console.log(firstPageTrendMovies);
+import './js-blocks/back-to-top-button';
