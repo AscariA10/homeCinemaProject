@@ -269,36 +269,21 @@ body.show-modal .modal_windowl {
   }
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   background-color: #e5e5e5;
   margin: 0;
-  font-family: roboto;
+  font-family: 'Roboto';
   font-size: 12px;
   font-weight: 500;
   line-height: 1.16;
 }
 
-ul {
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  text-decoration: none;
-}
-p {
-  margin: 0;
-}
 .container {
   margin-left: auto;
   margin-right: auto;
   align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
+  // padding-left: 20px;
+  // padding-right: 20px;
 }
 
 .section {
@@ -317,13 +302,15 @@ p {
 
 .card-link {
   display: block;
-  transition: box-shadow 0.8s ease 0.2ms, background-color 0.8s ease 0.8ms;
-  margin-bottom: 20px;
+  transition: box-shadow 0.8s ease 0.2ms, background-color 0.8s ease 0.8ms,
+    transform 0.8s ease 0.2ms;
+  border-radius: 5px;
 }
 .card-link:hover,
 .card-link :focus {
   display: block;
-  background-color: rgb(255, 156, 85, 0.1);
+  transform: scale(0.98);
+  background-color: rgb(255, 156, 85, 0.2);
 
   box-shadow: rgb(85, 91, 255, 0.8) 0px 0px 0px 3px,
     rgb(31, 193, 27, 0.8) 0px 0px 0px 5px,
@@ -354,14 +341,14 @@ p {
   justify-content: center;
   align-items: center;
 
-  color: #fff;
-  background: #ff6b08;
+  color: var(--light-color);
+  background: var(--active-btn-color);
 }
 
 .card-ganre {
   margin-right: 10px;
 
-  color: #ff6b08;
+  color: var(--active-btn-color);
 }
 .card-position {
   display: flex;
@@ -370,8 +357,8 @@ p {
 
 .card-release {
   padding-left: 4px;
-  border-left: 1px solid orange;
-  color: #ff6b08;
+  border-left: 1px solid var(--active-btn-color);
+  color: var(--active-btn-color);
 }
 
 .card-ganres,
@@ -583,8 +570,8 @@ p {
 @media screen and (min-width: 768px) {
   .container {
     width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
+    // padding-left: 32px;
+    // padding-right: 32px;
   }
 
   .card-average {
@@ -626,16 +613,23 @@ p {
     width: 394px;
     height: 574px;
   }
-  .gallery-wrapper {
-    width: 1216px;
-    gap: 16px;
-  }
+
   .card-item {
     width: calc((100% - 32px) / 3);
     height: 634px;
   }
 
   .gallery-list {
-    gap: 16px;
+    column-gap: 16px;
+    row-gap: 32px;
+  }
+  .card-title,
+  .card-release,
+  .card-ganre {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  .card-position {
+    align-items: center;
   }
 }
