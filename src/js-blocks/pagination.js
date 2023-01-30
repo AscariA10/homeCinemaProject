@@ -5,6 +5,8 @@ const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
 
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
+//
+// Before creating new instance read about clear method!
 export default class Pagination {
   constructor() {
     this.paginationPagesList = document.querySelector('.js-pages-list');
@@ -18,10 +20,7 @@ export default class Pagination {
     this.page = this.#getPageFromLocalStorage() || 1;
     this.#putPageToLocalStorage(1);
 
-    window.addEventListener('beforeunload', event => {
-      event.preventDefault();
-      this.#putPageToLocalStorage(this.page);
-    });
+    window.addEventListener('beforeunload', this.#onSave);
   }
 
   /** First param - link to requested function
@@ -36,6 +35,18 @@ export default class Pagination {
     this.fn = fn.bind(...arrOfArgs);
     this.linkToIntance = arrOfArgs[0];
     this.#render();
+  };
+
+  /** This method has to be called before creating new instance of class */
+  clear() {
+    this.paginationPagesList.removeEventListener('click', this.#onClick);
+    this.paginationArrowPrev.removeEventListener('click', this.#onPrev);
+    this.paginationArrowNext.removeEventListener('click', this.#onNext);
+    window.removeEventListener('beforeunload', this.#onSave);
+  }
+  #onSave = event => {
+    event.preventDefault();
+    this.#putPageToLocalStorage(this.page);
   };
 
   #onPrev = event => {
@@ -175,20 +186,22 @@ const api = new ApiMovies();
 //comment unneccessary code block
 (async function (movieName = 'Avatar') {
   // code for fetching trend movies and creating pagination
-  const pagination = new Pagination();
+  let pagination = new Pagination();
   pagination.setFunction(api.fetchTrendMovies, api);
-
-  setTimeout(async () => {
-    const pagination = new Pagination();
-    pagination.setFunction(api.searchMovieByName, api, movieName);
-  }, 7000);
-
-  setTimeout(async () => {
-    const pagination = new Pagination();
-    pagination.setFunction(api.searchMovieByName, api, 'Full');
-  }, 14000);
 
   // // code for fetching requested movies and creating pagination
   // const pagination = new Pagination();
   // pagination.setFunction(api.searchMovieByName, api, movieName);
+
+  // setTimeout(async () => {
+  //   pagination.clear();
+  //   pagination = new Pagination();
+  //   pagination.setFunction(api.searchMovieByName, api, movieName);
+  // }, 7000);
+
+  // setTimeout(async () => {
+  //   pagination.clear();
+  //   pagination = new Pagination();
+  //   pagination.setFunction(api.searchMovieByName, api, 'Full');
+  // }, 14000);
 })();
