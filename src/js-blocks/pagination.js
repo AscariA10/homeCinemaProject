@@ -25,7 +25,7 @@ export default class Pagination {
 
   /** First param - link to requested function
    *
-   * Second param - link to instance of reauested function
+   * Second param - link to instance of requested function
    * (instance has to be with setter named "pageNumber" to set current page
    * and with getter named "totalPagesNumber" to get count of total pages in result)
    *
@@ -190,7 +190,7 @@ const api = new ApiMovies();
   pagination.setFunction(api.fetchTrendMovies, api);
 
   // // code for fetching requested movies and creating pagination
-  // const pagination = new Pagination();
+  // let pagination = new Pagination();
   // pagination.setFunction(api.searchMovieByName, api, movieName);
 
   // setTimeout(async () => {
