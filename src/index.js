@@ -14,3 +14,5 @@ const firstPageTrendMovies = new LocalStorageEntry('firstPageTrendMovies');
 
 import './js-blocks/input-search';
 import './js-blocks/modal-window-render.js';
+
+import './js-blocks/back-to-top-button';
