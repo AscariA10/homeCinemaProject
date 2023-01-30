@@ -48,7 +48,7 @@ export const renderCard = (title, img, date, average, id, genres) => {
         <img class='card-img' src="${img}" alt="${title}">
         <p class="card-title">${title}</p>      
         <div class="card-position">
-          <p class="card-ganre">${genres.slice(0, 3).join(', ')}</p>
+          <p class="card-ganre">${genres.slice(0, 2).join(', ')}</p>
           <p class="card-release">${date}</p>
           <p class="card-average">${average}</p>
         </div>
