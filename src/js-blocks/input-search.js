@@ -5,47 +5,49 @@ const apiMovies = new ApiMovies();
 
 const galleryList = document.querySelector('.gallery-list');
 const errorMessage = document.querySelector('.warning-message');
-const formInput = document.querySelector('.js-search__input');
+const formInput = document.querySelector('.js-search__form');
 
 formInput.addEventListener('submit', onSearchMovies);
 
-function onSearchMovies(e) {
-  apiMovies.query = formInput.ariaValueMax.trim();
-  e.preventDefault();
-  errorMessage.classList.remove('.hidden');
+function onSearchMovies(event) {
+   //  apiMovies.query = formInput.ariaValueMax.trim();
+   event.preventDefault();
+   errorMessage.classList.remove('.hidden');
 
-  if (apiMovies.query !== '') {
-    apiMovies
-      .searchMovieByName()
-      .then(films => {
-        if (films.results.length < 1) {
-          errorMessage.classList.remove('.hidden');
+   console.log(formInput.value);
 
-          setTimeout(() => {
-            errorMessage.classList.add('.hidden');
-          }, 3000);
-          return;
-        }
-        if (films.results.length > 1) {
-          errorMessage.classList.add('.hidden');
+   if (apiMovies.query !== '') {
+      apiMovies
+         .searchMovieByName()
+         .then(films => {
+            if (films.results.length < 1) {
+               errorMessage.classList.remove('.hidden');
 
-          clearMovieCardContainer();
+               setTimeout(() => {
+                  errorMessage.classList.add('.hidden');
+               }, 3000);
+               return;
+            }
+            if (films.results.length > 1) {
+               errorMessage.classList.add('.hidden');
 
-          cardMarkup(films.results);
+               clearMovieCardContainer();
 
-          clearInput();
-        }
-      })
-      .catch(err => console(err));
-  }
+               cardMarkup(films.results);
+
+               clearInput();
+            }
+         })
+         .catch(err => console.log(err));
+   }
 }
 function clearInput() {
-  formInput.innerHTML = '';
+   formInput.innerHTML = '';
 }
 function clearMovieCardContainer() {
-  galleryList.innerHTML = '';
+   galleryList.innerHTML = '';
 }
 async function cardMarkup(data) {
-  const markup = cardList(data).map(renderCard).join('');
-  galleryList.innerHTML = markup;
+   const markup = cardList(data).map(renderCard).join('');
+   galleryList.innerHTML = markup;
 }
