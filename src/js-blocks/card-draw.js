@@ -42,12 +42,12 @@ export const cardContainer = ({
 };
 
 export const renderCard = (title, img, date, average, id) => {
-  return `<li class="gallery-card list" data-id=${id}>
+  return `<li class="gallery-card" data-id=${id}>
     <a class='card-link' href="">    
         <img class='card-img' src="${img}" alt="${title}">
         <p class="card-title">${title}</p>      
         <div class="card-position">
-          <p class="card-ganre"> TEST</p>
+          <p class="card-ganre"> Documentary, Drama, Other</p>
           <p class="card-release">${date}</p>
           <p class="card-average">${average}</p>
         </div>
@@ -55,12 +55,10 @@ export const renderCard = (title, img, date, average, id) => {
   </li>`;
 };
 
-
 // const render = async () => {
 //   const response = await api.fetchTrendMovies();
 //   console.log(response);
 //   cardList(response);
 // };
-
 
 // render();
