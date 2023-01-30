@@ -16,11 +16,11 @@ export default class Pagination {
     this.paginationArrowNext.addEventListener('click', this.#onNext);
 
     this.page = this.#getPageFromLocalStorage() || 1;
-    this.#putDataToLocalStorage(1);
+    this.#putPageToLocalStorage(1);
 
     window.addEventListener('beforeunload', event => {
       event.preventDefault();
-      this.#putDataToLocalStorage(this.page);
+      this.#putPageToLocalStorage(this.page);
     });
   }
 
@@ -81,7 +81,7 @@ export default class Pagination {
     return localStorageCurrentPage.getLocalStorageEntry();
   }
 
-  #putDataToLocalStorage(currentPage) {
+  #putPageToLocalStorage(currentPage) {
     localStorageCurrentPage.addPageNumberToLocalStorage(currentPage);
   }
 
@@ -175,20 +175,20 @@ const api = new ApiMovies();
 //comment unneccessary code block
 (async function (movieName = 'Avatar') {
   // code for fetching trend movies and creating pagination
-  // await api.fetchTrendMovies();
-  let pagination = new Pagination();
+  const pagination = new Pagination();
   pagination.setFunction(api.fetchTrendMovies, api);
 
-  // setTimeout(async () => {
-  //   // await api.searchMovieByName(movieName);
-  //   // api.pageNumber = 1;
-  //   pagination = new Pagination();
-  //   pagination.setFunction(api.searchMovieByName, api, movieName);
-  // }, 7000);
-  //
+  setTimeout(async () => {
+    const pagination = new Pagination();
+    pagination.setFunction(api.searchMovieByName, api, movieName);
+  }, 7000);
+
+  setTimeout(async () => {
+    const pagination = new Pagination();
+    pagination.setFunction(api.searchMovieByName, api, 'Full');
+  }, 14000);
+
   // // code for fetching requested movies and creating pagination
-  // await api.searchMovieByName(movieName);
-  // api.pageNumber = 1;
-  // const pagination = new Pagination(api.pageNumber, api.totalPagesNumber);
+  // const pagination = new Pagination();
   // pagination.setFunction(api.searchMovieByName, api, movieName);
 })();
