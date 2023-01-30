@@ -1,6 +1,6 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 h1,
@@ -11,38 +11,55 @@ h5,
 h6,
 p,
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 img {
-    width: 100%;
-    display: block;
-    height: auto;
+  width: 100%;
+  display: block;
+  height: auto;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
+// .container {
+//   margin: 0 auto;
+
+//   @media screen and (min-width: 320px) {
+//     width: 280px;
+//     padding: 0 20px;
+//   }
+
+//   @media screen and (min-width: 768px) {
+//     width: 704px;
+//     padding: 0 32px;
+//   }
+
+//   @media screen and (min-width: 1280px) {
+//     width: 1200px;
+//     padding: 0 32px;
+//   }
+// }
 
 .container {
-    margin: 0 auto;
+  margin: 0 auto;
+  padding: 0 20px;
 
-    @media screen and (min-width: 320px) {
-        width: 280px;
-        padding: 0 20px;
-    }
+  @media screen and (min-width: 320px) {
+    width: 320px;
+  }
 
-    @media screen and (min-width: 768px) {
-        width: 704px;
-        padding: 0 32px;
-    }
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    padding: 0 32px;
+  }
 
-    @media screen and (min-width: 1280px) {
-        width: 1200px;
-        padding: 0 32px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 1200px;
+  }
 }
