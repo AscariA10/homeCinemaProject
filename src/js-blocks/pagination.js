@@ -1,5 +1,8 @@
-// do not remove this import
+// do not remove the code below
 import { cardList } from './card-draw.js';
+import { LocalStorageEntry } from './localStorageEntry.js';
+const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
+const localStorageCurrentFilms = new LocalStorageEntry('current_page_films');
 
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
@@ -62,12 +65,28 @@ export default class Pagination {
   #render = async () => {
     this.linkToIntance.pageNumber = this.page;
     const res = await this.fn();
+
+    this.#putDataToLocalStorage(this.page, res);
+
     cardList(res);
   };
 
   #onTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+  }
+
+  #getPageFromLocalStorage() {
+    return localStorageCurrentPage.getLocalStorageEntry();
+  }
+
+  #getFilmsFromLocalStorage() {
+    return localStorageCurrentFilms.getLocalStorageEntry();
+  }
+
+  #putDataToLocalStorage(currentPage, films) {
+    localStorageCurrentPage.addPageNumberToLocalStorage(currentPage);
+    localStorageCurrentFilms.addFilmsToLocalStorage(films);
   }
 
   #createPagination(page, totalPages) {
@@ -148,6 +167,7 @@ export default class Pagination {
 }
 
 import ApiMovies from './fetch.js';
+import { LocalStorageEntry } from './localStorageEntry.js';
 const api = new ApiMovies();
 
 //comment unneccessary code block

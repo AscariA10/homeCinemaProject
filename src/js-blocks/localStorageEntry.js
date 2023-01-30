@@ -26,10 +26,10 @@ export class LocalStorageEntry {
   addFilmsToLocalStorage(movie) {
     localStorage.setItem(this.key, JSON.stringify(movie));
   }
-  
+
   // add page number to localStorage
-  addPageNumberToLocalStorage(key, pageNumber) {
-    localStorage.setItem(key, JSON.stringify(pageNumber));
+  addPageNumberToLocalStorage(pageNumber) {
+    localStorage.setItem(this.key, JSON.stringify(pageNumber));
   }
 
   // update entry in localStorage
