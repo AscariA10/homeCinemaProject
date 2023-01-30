@@ -303,7 +303,6 @@ body {
 .card-link {
   display: block;
   transition: box-shadow 0.8s ease 0.2ms, background-color 0.8s ease 0.8ms;
-  margin-bottom: 20px;
   border-radius: 5px;
 }
 .card-link:hover,
@@ -341,13 +340,13 @@ body {
   align-items: center;
 
   color: #fff;
-  background: #ff6b08;
+  background: var(--active-btn-color);
 }
 
 .card-ganre {
   margin-right: 10px;
 
-  color: #ff6b08;
+  color: var(--active-btn-color);
 }
 .card-position {
   display: flex;
@@ -623,5 +622,13 @@ body {
 
   .gallery-list {
     gap: 16px;
+  }
+  .card-title,
+  .card-release,
+  .card-ganre {
+    font-size: 20px;
+  }
+  .card-position {
+    align-items: center;
   }
 }
