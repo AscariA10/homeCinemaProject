@@ -1,6 +1,7 @@
 
 .header {
     height: 230px;
+    max-width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -14,6 +15,7 @@
     }
 
     @media screen and (min-width: 768px) {
+        max-width: 100%;
         height: 219px;
         background-image: url(../images/tablet-bg1.jpg);
 
@@ -26,7 +28,7 @@
     }
 
     @media screen and (min-width: 1280px) {
-        max-width: 1600px;
+    max-width: 100%;
         height: 216px;
         margin: 0 auto;
         background-image: url(../images/desktop-bg1.jpg);
@@ -239,15 +241,15 @@ animation: pulse 5s infinite;
 }
 .warning-message{
     position: absolute;
+    bottom: -40px;
+    left: 5px;
     
         font-weight: 700;
         font-size: 14px;
         line-height: 1.15;
-        color: rgb(243, 44, 44);
+        color: white;
 
-        visibility: visible;
-            opacity: 1;
-            pointer-events: visible;
+      
        
         @media screen and (min-width: 320px) {
                 width: 280px;
@@ -259,8 +261,3 @@ animation: pulse 5s infinite;
             }
 }
 
-.warning-message__hidden{
-    opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-}

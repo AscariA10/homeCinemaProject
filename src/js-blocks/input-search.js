@@ -1,41 +1,51 @@
-import { render } from './card-draw';
+import { renderCard } from './card-draw';
 import ApiMovies from './fetch';
 
 const apiMovies = new ApiMovies();
 
-const searchValue = document.querySelector('header__search--input');
-const galleryContainer = document.querySelector('.gallery-list');
-const error = document.querySelector('.warning-message');
+const galleryList = document.querySelector('.gallery-list');
+const errorMessage = document.querySelector('.warning-message');
+const formInput = document.querySelector('.js-search__input');
 
-searchValue.addEventListener('submit', onSearchFilms);
+formInput.addEventListener('submit', onSearchMovies);
 
-async function onSearchFilms(e) {
+function onSearchMovies(e) {
+  apiMovies.query = formInput.ariaValueMax.trim();
   e.preventDefault();
+  errorMessage.classList.remove('.hidden');
 
-  try {
-    const searchFilm = searchValue.value.trim();
-    apiMovies.query = searchFilm;
-    if (apiMovies.query === '') {
-      error.classList.remove('warning-message__hidden');
-      setTimeout(() => error.classList.add('warning-message__hidden'), 3000);
-      return;
-    }
-    await apiMovies.searchMovieByName().then(({ results, total_results }) => {
-      clearGallaryContainer();
-      render(results);
+  if (apiMovies.query !== '') {
+    apiMovies
+      .searchMovieByName()
+      .then(films => {
+        if (films.results.length < 1) {
+          errorMessage.classList.remove('.hidden');
 
-      if (results.length < 1) {
-        error.classList.remove('warning-message__hidden');
-        setTimeout(() => error.classList.add('warning-message__hidden'), 3000);
-        return;
-      }
-    });
-    searchValue.value = '';
-  } catch (err) {
-    console.log(err);
+          setTimeout(() => {
+            errorMessage.classList.add('.hidden');
+          }, 3000);
+          return;
+        }
+        if (films.results.length > 1) {
+          errorMessage.classList.add('.hidden');
+
+          clearMovieCardContainer();
+
+          cardMarkup(films.results);
+
+          clearInput();
+        }
+      })
+      .catch(err => console(err));
   }
 }
-function clearGallaryContainer() {
-  const gallaryContainer = document.querySelector('.gallery-list');
-  gallaryContainer.innerHTML = '';
+function clearInput() {
+  formInput.innerHTML = '';
+}
+function clearMovieCardContainer() {
+  galleryList.innerHTML = '';
+}
+async function cardMarkup(data) {
+  const markup = cardList(data).map(renderCard).join('');
+  galleryList.innerHTML = markup;
 }

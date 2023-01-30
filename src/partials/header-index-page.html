@@ -26,9 +26,9 @@
 
     <!-- ----------------SEARCH----------------- -->
     <div class="header__search">
-      <div class="header__search--form">
+      <form class="header__search--form js-search__form">
         <input
-          class="header__search--input"
+          class="header__search--input js-search__input"
           name="searchInput"
           type="text"
           placeholder="Movie search"
@@ -38,10 +38,10 @@
             <use href="./images/sprite.svg#icon-search"></use>
           </svg>
         </button>
-        <p class="warning-message warning-message__hidden js-warning-message">
+        <p class="warning-message hidden">
           No matches found for your query. Enter the properly name of the movie.
         </p>
-      </div>
+      </form>
     </div>
   </div>
 </header>
