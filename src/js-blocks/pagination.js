@@ -5,17 +5,16 @@ const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
 
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
-//
-// Before creating new instance read about clear method below!
+
 export default class Pagination {
   constructor(isPopularFilms) {
     this.paginationPagesList = document.querySelector('.js-pages-list');
     this.paginationArrowPrev = document.querySelector('.js-prev-btn');
     this.paginationArrowNext = document.querySelector('.js-next-btn');
 
-    this.paginationPagesList.addEventListener('click', this.#onClick);
-    this.paginationArrowPrev.addEventListener('click', this.#onPrev);
-    this.paginationArrowNext.addEventListener('click', this.#onNext);
+    this.paginationPagesList.onclick = this.#onClick;
+    this.paginationArrowPrev.onclick = this.#onPrev;
+    this.paginationArrowNext.onclick = this.#onNext;
 
     this.page = 1;
     this.isPopularFilms = isPopularFilms;
@@ -25,7 +24,7 @@ export default class Pagination {
       // this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
     }
 
-    window.addEventListener('beforeunload', this.#onSave);
+    window.beforeunload = this.#onSave;
   }
 
   /** First param - link to requested function
@@ -41,14 +40,6 @@ export default class Pagination {
     this.linkToIntance = arrOfArgs[0];
     this.#render();
   };
-
-  /** This method has to be called before creating new instance of class */
-  clear() {
-    this.paginationPagesList.removeEventListener('click', this.#onClick);
-    this.paginationArrowPrev.removeEventListener('click', this.#onPrev);
-    this.paginationArrowNext.removeEventListener('click', this.#onNext);
-    window.removeEventListener('beforeunload', this.#onSave);
-  }
 
   #onSave = event => {
     event.preventDefault();
@@ -201,11 +192,10 @@ const api = new ApiMovies();
   // let pagination = new Pagination();
   // pagination.setFunction(api.searchMovieByName, api, movieName);
 
-  // setTimeout(async () => {
-  //   pagination.clear();
-  //   pagination = new Pagination();
-  //   pagination.setFunction(api.searchMovieByName, api, movieName);
-  // }, 7000);
+  setTimeout(async () => {
+    pagination = new Pagination();
+    pagination.setFunction(api.searchMovieByName, api, movieName);
+  }, 7000);
 
   // setTimeout(async () => {
   //   pagination.clear();
