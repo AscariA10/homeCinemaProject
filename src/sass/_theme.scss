@@ -1,12 +1,29 @@
 .theme {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 10px;
+    @media screen and (max-width: 767px) {
+        margin-bottom: -20px;
+    }
 }
 
 .theme svg {
     cursor: pointer;
+}
+
+.sun-svg {
+    width: 40px;
+    height: 40px;
+    fill: #FFF;
+    @media screen and (max-width: 767px) {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.moon-svg {
+    width: 40px;
+    height: 38px;
+    fill: #FFF;
+    @media screen and (max-width: 767px) {
+        width: 32px;
+        height: 30px;
+    }
 }

@@ -3,26 +3,6 @@
   <div class="container">
     <!-- ------------------WRAPPER-------------------- -->
     <div class="header__wrap">
-      <div class="theme">
-        <svg
-          class="change-theme"
-          data-theme="light"
-          width="40"
-          height="40"
-          fill="#FFF"
-        >
-          <use href="./images/sprite.svg#icon-sun"></use>
-        </svg>
-        <svg
-          class="change-theme"
-          data-theme="dark"
-          width="40"
-          height="38"
-          fill="#222"
-        >
-          <use href="./images/sprite.svg#icon-moon"></use>
-        </svg>
-      </div>
       <!-- -------------------NAVIGATION----------------- -->
       <nav class="header__nav">
         <!-- ----------------LOGO--------------------- -->
@@ -47,25 +27,37 @@
       </nav>
     </div>
 
-    <!-- ----------------SEARCH----------------- -->
-    <div class="header__search">
-      <form class="header__search--form js-search__form" name="search">
-        <input
-          class="header__search--input js-search__input"
-          name="searchInput"
-          type="text"
-          placeholder="Movie search"
-        />
-        <button type="submit" class="header__search--btn">
-          <svg width="12" height="12" class="header__search--icon">
-            <use href="./images/sprite.svg#icon-search"></use>
-          </svg>
-        </button>
+    <!-- ----------------SEARCH AND SWITCHER----------------- -->
 
-        <p class="warning-message hidden">
-          No matches found for your query. Enter the properly name of the movie.
-        </p>
-      </form>
+    <div class="header__searchswitcher">
+      <div class="theme">
+        <svg class="change-theme sun-svg" data-theme="light">
+          <use href="./images/sprite.svg#icon-sun"></use>
+        </svg>
+        <svg class="change-theme moon-svg" data-theme="dark">
+          <use href="./images/sprite.svg#icon-moon"></use>
+        </svg>
+      </div>
+      <div class="header__search">
+        <form class="header__search--form js-search__form" name="search">
+          <input
+            class="header__search--input js-search__input"
+            name="searchInput"
+            type="text"
+            placeholder="Movie search"
+          />
+          <button type="submit" class="header__search--btn">
+            <svg width="12" height="12" class="header__search--icon">
+              <use href="./images/sprite.svg#icon-search"></use>
+            </svg>
+          </button>
+
+          <p class="warning-message hidden">
+            No matches found for your query. Enter the properly name of the
+            movie.
+          </p>
+        </form>
+      </div>
     </div>
   </div>
 </header>

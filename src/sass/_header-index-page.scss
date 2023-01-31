@@ -226,3 +226,14 @@
       width: 393px;
    }
 }
+
+.header__searchswitcher {
+   display: flex;
+   align-items: end;
+
+   @media screen and (max-width: 767px) {
+      flex-direction: column;
+      align-items: start;
+      margin-top: 20px;
+   }
+}
