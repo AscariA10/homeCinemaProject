@@ -5,7 +5,9 @@ import { LocalStorageEntry } from './js-blocks/localStorageEntry.js';
 
 /**class declaration */
 const apiMovies = new ApiMovies();
-// const pagination = new Pagination();
+
+const pagination = new Pagination(true);
+pagination.setFunction(apiMovies.fetchTrendMovies, apiMovies);
 
 /**Local Storage Initialisation */
 

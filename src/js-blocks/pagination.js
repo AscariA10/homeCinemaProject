@@ -2,6 +2,7 @@
 import { cardList } from './card-draw.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
 const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
+localStorageCurrentPage.addPageNumberToLocalStorage(0);
 
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
@@ -184,19 +185,19 @@ const api = new ApiMovies();
 
 //comment unneccessary code block
 (async function (movieName = 'Avatar') {
-  // code for fetching trend movies and creating pagination
-  const pagination = new Pagination(true);
-  pagination.setFunction(api.fetchTrendMovies, api);
-
+  // // code for fetching trend movies and creating pagination
+  // const pagination = new Pagination(true);
+  // pagination.setFunction(api.fetchTrendMovies, api);
+  //
   // // code for fetching requested movies and creating pagination
   // const pagination = new Pagination();
   // pagination.setFunction(api.searchMovieByName, api, movieName);
-
+  //
   // setTimeout(async () => {
   //   const pagination = new Pagination();
   //   pagination.setFunction(api.searchMovieByName, api, movieName);
   // }, 7000);
-
+  //
   // setTimeout(async () => {
   //   const pagination = new Pagination();
   //   pagination.setFunction(api.searchMovieByName, api, 'Full');
