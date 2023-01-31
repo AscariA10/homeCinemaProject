@@ -24,7 +24,7 @@ export default class Pagination {
       // this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
     }
 
-    window.beforeunload = this.#onSave;
+    window.onbeforeunload = this.#onSave;
   }
 
   /** First param - link to requested function
@@ -189,7 +189,7 @@ const api = new ApiMovies();
   pagination.setFunction(api.fetchTrendMovies, api);
 
   // // code for fetching requested movies and creating pagination
-  // let pagination = new Pagination();
+  // const pagination = new Pagination();
   // pagination.setFunction(api.searchMovieByName, api, movieName);
 
   // setTimeout(async () => {
