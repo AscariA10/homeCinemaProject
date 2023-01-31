@@ -1,30 +1,37 @@
-// do not remove this import
+// do not remove the code below
 import { cardList } from './card-draw.js';
+import { LocalStorageEntry } from './localStorageEntry.js';
+const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
 
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
 export default class Pagination {
-  /** First param - current page of pagination
-   * Second param - total count of pages
-   */
-  constructor(page, totalPages) {
-    this.page = page;
-    this.totalPages = totalPages;
-
+  constructor(isPopularFilms) {
     this.paginationPagesList = document.querySelector('.js-pages-list');
     this.paginationArrowPrev = document.querySelector('.js-prev-btn');
     this.paginationArrowNext = document.querySelector('.js-next-btn');
 
-    this.paginationPagesList.addEventListener('click', this.#onClick);
-    this.paginationArrowPrev.addEventListener('click', this.#onPrev);
-    this.paginationArrowNext.addEventListener('click', this.#onNext);
+    this.paginationPagesList.onclick = this.#onClick;
+    this.paginationArrowPrev.onclick = this.#onPrev;
+    this.paginationArrowNext.onclick = this.#onNext;
 
-    this.#createPagination(this.page, this.totalPages);
+    this.page = 1;
+    this.isPopularFilms = isPopularFilms;
+
+    if (isPopularFilms) {
+      this.page = this.#getPageFromLocalStorage() || 1;
+      // this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
+    }
+
+    window.onbeforeunload = this.#onSave;
   }
 
   /** First param - link to requested function
-   * Second param - link to instance of reauested function
-   * (instance has to be with setter named "pageNumber" to set current page)
+   *
+   * Second param - link to instance of requested function
+   * (instance has to be with setter named "pageNumber" to set current page
+   * and with getter named "totalPagesNumber" to get count of total pages in result)
+   *
    * Third and further params - args of requested function
    */
   setFunction = async (fn, ...arrOfArgs) => {
@@ -33,17 +40,20 @@ export default class Pagination {
     this.#render();
   };
 
+  #onSave = event => {
+    event.preventDefault();
+    if (this.isPopularFilms) this.#putPageToLocalStorage(this.page);
+  };
+
   #onPrev = event => {
     this.page--;
     this.#render();
-    this.#createPagination(this.page, this.totalPages);
     this.#onTop();
   };
 
   #onNext = event => {
     this.page++;
     this.#render();
-    this.#createPagination(this.page, this.totalPages);
     this.#onTop();
   };
 
@@ -55,19 +65,39 @@ export default class Pagination {
 
     this.page = Number(event.target.innerText);
     this.#render();
-    this.#createPagination(this.page, this.totalPages);
     this.#onTop();
   };
 
   #render = async () => {
+    this.#hidePagination();
+
     this.linkToIntance.pageNumber = this.page;
-    const res = await this.fn();
-    cardList(res);
+    this.res = await this.fn();
+    this.totalPages = this.linkToIntance.totalPagesNumber;
+    cardList(this.res);
+
+    if (this.isPopularFilms) this.#putPageToLocalStorage(this.page);
+
+    this.#createPagination(this.page, this.totalPages);
   };
 
   #onTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+  }
+
+  #getPageFromLocalStorage() {
+    return localStorageCurrentPage.getLocalStorageEntry();
+  }
+
+  #putPageToLocalStorage(currentPage) {
+    localStorageCurrentPage.addPageNumberToLocalStorage(currentPage);
+  }
+
+  #hidePagination() {
+    this.paginationPagesList.innerHTML = '';
+    this.paginationArrowPrev.classList.add('visually-hidden');
+    this.paginationArrowNext.classList.add('visually-hidden');
   }
 
   #createPagination(page, totalPages) {
@@ -147,19 +177,27 @@ export default class Pagination {
   }
 }
 
+// Examples of using class below
 import ApiMovies from './fetch.js';
 const api = new ApiMovies();
 
 //comment unneccessary code block
 (async function (movieName = 'Avatar') {
-  // code for fetching trend movies and creating pagination
-  await api.fetchTrendMovies();
-  const pagination = new Pagination(api.pageNumber, api.totalPagesNumber);
-  pagination.setFunction(api.fetchTrendMovies, api);
+  // // code for fetching trend movies and creating pagination
+  // const pagination = new Pagination(true);
+  // pagination.setFunction(api.fetchTrendMovies, api);
   //
   // // code for fetching requested movies and creating pagination
-  // await api.searchMovieByName(movieName);
-  // api.pageNumber = 1;
-  // const pagination = new Pagination(api.pageNumber, api.totalPagesNumber);
+  // const pagination = new Pagination();
   // pagination.setFunction(api.searchMovieByName, api, movieName);
+  //
+  // setTimeout(async () => {
+  //   const pagination = new Pagination();
+  //   pagination.setFunction(api.searchMovieByName, api, movieName);
+  // }, 7000);
+  //
+  // setTimeout(async () => {
+  //   const pagination = new Pagination();
+  //   pagination.setFunction(api.searchMovieByName, api, 'Full');
+  // }, 14000);
 })();

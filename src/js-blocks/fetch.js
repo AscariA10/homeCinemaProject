@@ -54,7 +54,7 @@ export default class ApiMovies {
 
     try {
       const { data } = await axios.get(
-        `search/movie?api_key=${this.API_KEY}&language=en-US&query=${this.searchValue}&page=${this.page}&include_adult=false`
+        `search/movie?api_key=${this.API_KEY}&language=en-US&query=${searchValue}&page=${this.page}&include_adult=false`
       );
       this.totalPages = data.total_pages;
       return data.results;
