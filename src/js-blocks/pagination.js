@@ -6,7 +6,7 @@ const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
 //
-// Before creating new instance read about clear method!
+// Before creating new instance read about clear method below!
 export default class Pagination {
   constructor() {
     this.paginationPagesList = document.querySelector('.js-pages-list');
@@ -18,7 +18,7 @@ export default class Pagination {
     this.paginationArrowNext.addEventListener('click', this.#onNext);
 
     this.page = this.#getPageFromLocalStorage() || 1;
-    this.#putPageToLocalStorage(1);
+    this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
 
     window.addEventListener('beforeunload', this.#onSave);
   }
@@ -44,6 +44,7 @@ export default class Pagination {
     this.paginationArrowNext.removeEventListener('click', this.#onNext);
     window.removeEventListener('beforeunload', this.#onSave);
   }
+
   #onSave = event => {
     event.preventDefault();
     this.#putPageToLocalStorage(this.page);
