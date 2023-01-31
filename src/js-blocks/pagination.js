@@ -69,7 +69,7 @@ export default class Pagination {
   };
 
   #render = async () => {
-    this.#hidePagination();
+    this.hidePagination();
 
     this.linkToIntance.pageNumber = this.page;
     this.res = await this.fn();
@@ -94,11 +94,11 @@ export default class Pagination {
     localStorageCurrentPage.addPageNumberToLocalStorage(currentPage);
   }
 
-  #hidePagination() {
+  hidePagination = () => {
     this.paginationPagesList.innerHTML = '';
     this.paginationArrowPrev.classList.add('visually-hidden');
     this.paginationArrowNext.classList.add('visually-hidden');
-  }
+  };
 
   #createPagination(page, totalPages) {
     let markup = '';
