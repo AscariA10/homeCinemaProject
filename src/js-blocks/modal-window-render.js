@@ -4,8 +4,8 @@ import { LocalStorageEntry } from './localStorageEntry';
 
 const api = new Api();
 
-const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
-const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage');
+const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage'); 
+const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');  
 
 export const refs = {
    filmList: document.querySelector('.gallery-list'),
@@ -14,21 +14,24 @@ export const refs = {
 
 refs.filmList.addEventListener('click', onFilmCardClick);
 
+let GlodObj = {};///
+
 async function onFilmCardClick(e) {
    e.preventDefault();
    /**  search for the nearest ancestor with the class .gallery-card and get the id from it */
-   const filmId = e.target.closest('.gallery-card').dataset.id;
-   if (filmId) {
+  const filmId = e.target.closest('.gallery-card').dataset.id;
+    if (filmId) {
       /**  query for a single movie by id  */
-      const filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
+      filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
+      GlodObj.movie = filmData;/////////
       /**  Creating the markup for the modal window  */
-      const markup = ceateModalMarkup(filmData);
+     const markup = ceateModalMarkup(filmData);
       /**  Modal window renderer  */
       renderModal(markup, refs.modalFilm);
       openModal();
+      
    }
 }
-
 function ceateModalMarkup(film) {
    const {
       title,
@@ -40,7 +43,8 @@ function ceateModalMarkup(film) {
       vote_count,
       genres,
       id,
-   } = film;
+  } = film;
+  
    const normalizeGenres = genres.map(({ name }) => name).join(', ');
    return `<div class="backdrop js-backdrop">
   <div class="modal_window">
@@ -98,13 +102,13 @@ function ceateModalMarkup(film) {
         <p class="modal_text">${overview}</p>
         <ul class="btn_list">
           <li>
-            <button type="button" class="btn_choice btn_watched">
-              <span class="change_watch">add to Watched</span>
+            <button type="submit" class="btn_choice btn_watched">
+              <span class="change_watch"></span>
             </button>
           </li>
           <li>
-            <button type="button" class="btn_choice btn_queue">
-              <span class="change_queue">add to queue</span>
+            <button type="submit" class="btn_choice btn_queue">
+              <span class="change_queue"></span>
             </button>
           </li>
         </ul>
@@ -121,7 +125,64 @@ function openModal() {
    closeModalBtnRef.addEventListener('click', onCloseModal);
    backdrop.addEventListener('click', onBackdropClick);
    window.addEventListener('keydown', onEscPress);
-   document.body.classList.add('show-modal');
+  document.body.classList.add('show-modal');
+  ////////start
+  let myMovie = GlodObj.movie;//////
+    //if (JSON.parse(localStorage.getItem(myMovie)))
+    //////end
+//watch
+const watchBtnRef = document.querySelector('.btn_watched');
+const watchSpanEl = document.querySelector('.change_watch');
+  watchBtnRef.addEventListener('click', onChangeTitleWatch);
+  
+ if(watchedMoviesStorage.updateLocalStorageEntry())
+  {
+    watchSpanEl.textContent = 'remove from watched';
+  } 
+  else {
+   watchSpanEl.textContent = 'add to watched';
+  }
+   
+  function onChangeTitleWatch() {
+  watchedMoviesStorage.updateLocalStorageEntry();
+   if (watchSpanEl.textContent == 'add to watched') {
+      watchSpanEl.textContent = 'remove from watched';
+      watchedMoviesStorage.addMovieToLocalStorage(myMovie);
+      //watch.addMovieToLocalStorage(movie222);
+   } else {
+      watchSpanEl.textContent = 'add to watched';
+      watchedMoviesStorage.deleteMovieFromLocalStorage(myMovie);
+   }
+  }
+  // queue
+  
+const queueBtnRef = document.querySelector('.btn_queue');
+const queueSpanEl = document.querySelector('.change_queue');
+queueBtnRef.addEventListener('click', onChangeTitleQueue);
+
+  //queueMoviesStorage.updateLocalStorageEntry();
+  
+  if(queueMoviesStorage.updateLocalStorageEntry())
+  {
+   queueSpanEl.textContent = 'remove from queue';
+  } 
+  else {
+     queueSpanEl.textContent = 'add to queue';
+    }
+  
+  function onChangeTitleQueue() {
+   //console.log(queueMoviesStorage.getLocalStorageEntry(movie2));
+  
+  if (queueSpanEl.textContent == 'add to queue')
+    {
+      queueSpanEl.textContent = 'remove from queue';
+      queueMoviesStorage.addMovieToLocalStorage(myMovie);
+   } else {
+      queueSpanEl.textContent = 'add to queue';
+      queueMoviesStorage.deleteMovieFromLocalStorage(myMovie);
+   }
+}
+
 }
 
 function onCloseModal() {
