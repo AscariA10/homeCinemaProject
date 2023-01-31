@@ -8,7 +8,7 @@ const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
 //
 // Before creating new instance read about clear method below!
 export default class Pagination {
-  constructor() {
+  constructor(isPopularFilms) {
     this.paginationPagesList = document.querySelector('.js-pages-list');
     this.paginationArrowPrev = document.querySelector('.js-prev-btn');
     this.paginationArrowNext = document.querySelector('.js-next-btn');
@@ -17,8 +17,13 @@ export default class Pagination {
     this.paginationArrowPrev.addEventListener('click', this.#onPrev);
     this.paginationArrowNext.addEventListener('click', this.#onNext);
 
-    this.page = this.#getPageFromLocalStorage() || 1;
-    this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
+    this.page = 1;
+    this.isPopularFilms = isPopularFilms;
+
+    if (isPopularFilms) {
+      this.page = this.#getPageFromLocalStorage();
+      // this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
+    }
 
     window.addEventListener('beforeunload', this.#onSave);
   }
@@ -47,7 +52,7 @@ export default class Pagination {
 
   #onSave = event => {
     event.preventDefault();
-    this.#putPageToLocalStorage(this.page);
+    if (this.isPopularFilms) this.#putPageToLocalStorage(this.page);
   };
 
   #onPrev = event => {
@@ -80,6 +85,8 @@ export default class Pagination {
     this.res = await this.fn();
     this.totalPages = this.linkToIntance.totalPagesNumber;
     cardList(this.res);
+
+    if (this.isPopularFilms) this.#putPageToLocalStorage(this.page);
 
     this.#createPagination(this.page, this.totalPages);
   };
@@ -187,7 +194,7 @@ const api = new ApiMovies();
 //comment unneccessary code block
 (async function (movieName = 'Avatar') {
   // code for fetching trend movies and creating pagination
-  let pagination = new Pagination();
+  let pagination = new Pagination(true);
   pagination.setFunction(api.fetchTrendMovies, api);
 
   // // code for fetching requested movies and creating pagination
