@@ -40,7 +40,10 @@ export class LocalStorageEntry {
 
   // get entries from localStorage
   getLocalStorageEntry() {
-    if (localStorage.getItem(this.key)) {
+    if (
+      localStorage.getItem(this.key) &&
+      localStorage.getItem(this.key) !== 'undefined'
+    ) {
       return JSON.parse(localStorage.getItem(this.key));
     }
   }

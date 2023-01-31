@@ -2,11 +2,9 @@
 import { cardList } from './card-draw.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
 const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
-localStorageCurrentPage.addPageNumberToLocalStorage(0);
 
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
-
 export default class Pagination {
   constructor(isPopularFilms) {
     this.paginationPagesList = document.querySelector('.js-pages-list');
