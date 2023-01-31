@@ -323,7 +323,7 @@ body {
   margin-bottom: 8px;
   margin-top: 8px;
   margin-right: auto;
-
+  overflow-wrap: break-word;
   text-transform: uppercase;
   font-weight: 500;
   color: #000000;
@@ -335,7 +335,7 @@ body {
   padding: 1px 6px;
   border-radius: 5px;
   font-size: 12px;
-  margin-left: 10px;
+  margin-left: 4px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -368,10 +368,10 @@ body {
   line-height: 1.16;
 }
 
-.card-item {
-  width: 280px;
-  height: 438px;
-}
+// .card-item {
+//   width: 280px;
+//   height: 438px;
+// }
 
 .pagination {
   width: 100%;
@@ -595,7 +595,7 @@ body {
     padding-bottom: 60px;
   }
 
-  .card-item {
+  .gallery-card {
     width: calc((100% - 32px) / 2);
     height: 495px;
   }
@@ -614,7 +614,7 @@ body {
     height: 574px;
   }
 
-  .card-item {
+  .gallery-card {
     width: calc((100% - 32px) / 3);
     height: 634px;
   }
@@ -629,6 +629,7 @@ body {
     font-size: 20px;
     line-height: 1.2;
   }
+
   .card-position {
     align-items: center;
   }
