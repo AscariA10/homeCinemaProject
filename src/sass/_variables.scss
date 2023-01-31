@@ -1,65 +1,14 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-img {
-  width: 100%;
-  display: block;
-  height: auto;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-// .container {
-//   margin: 0 auto;
-
-//   @media screen and (min-width: 320px) {
-//     width: 280px;
-//     padding: 0 20px;
-//   }
-
-//   @media screen and (min-width: 768px) {
-//     width: 704px;
-//     padding: 0 32px;
-//   }
-
-//   @media screen and (min-width: 1280px) {
-//     width: 1200px;
-//     padding: 0 32px;
-//   }
-// }
-
-.container {
-  margin: 0 auto;
-  padding: 0 20px;
-
-  @media screen and (min-width: 320px) {
-    width: 320px;
-  }
-
-  @media screen and (min-width: 768px) {
-    width: 768px;
-    padding: 0 32px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    width: 1200px;
-  }
+:root {
+  --light-color: #fff;
+  --dark-color: #000;
+  --gray-color: #8c8c8c;
+  --active-btn-color: #ff6b01;
+  --shadow-color: rgba(0, 0, 0, 0.25);
+  --background-color-for-hover: rgb(255, 156, 85, 0.2);
+  --box-shadow-color: rgb(85, 91, 255, 0.7) 0px 0px 0px 3px,
+    rgb(31, 193, 27, 0.8) 0px 0px 0px 5px,
+    rgb(255, 217, 19, 0.8) 0px 0px 0px 7px,
+    rgb(255, 156, 85, 0.8) 0px 0px 0px 9px,
+    rgb(255, 85, 85, 0.8) 0px 0px 0px 10px;
+  --options-for-transition: 0.8s ease 0.2ms;
 }
