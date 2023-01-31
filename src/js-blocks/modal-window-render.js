@@ -20,17 +20,17 @@ async function onFilmCardClick(e) {
    e.preventDefault();
    /**  search for the nearest ancestor with the class .gallery-card and get the id from it */
   const filmId = e.target.closest('.gallery-card').dataset.id;
-    if (filmId) {
-      /**  query for a single movie by id  */
-      filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
-      GlodObj.movie = filmData;/////////
-      /**  Creating the markup for the modal window  */
-     const markup = ceateModalMarkup(filmData);
-      /**  Modal window renderer  */
-      renderModal(markup, refs.modalFilm);
-      openModal();
-      
-   }
+  if (filmId) {
+    /**  query for a single movie by id  */
+    filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
+    GlodObj.movie = filmData;/////////
+    GlodObj.id = filmId;/////////
+    /**  Creating the markup for the modal window  */
+    const markup = ceateModalMarkup(filmData);
+    /**  Modal window renderer  */
+    renderModal(markup, refs.modalFilm);
+    openModal();
+  }
 }
 function ceateModalMarkup(film) {
    const {
@@ -102,13 +102,13 @@ function ceateModalMarkup(film) {
         <p class="modal_text">${overview}</p>
         <ul class="btn_list">
           <li>
-            <button type="submit" class="btn_choice btn_watched">
-              <span class="change_watch"></span>
+            <button type="button" class="btn_choice btn_watched">
+              <span class="change_watch">add to watched</span>
             </button>
           </li>
           <li>
-            <button type="submit" class="btn_choice btn_queue">
-              <span class="change_queue"></span>
+            <button type="button" class="btn_choice btn_queue">
+              <span class="change_queue">add to queue</span>
             </button>
           </li>
         </ul>
@@ -117,7 +117,6 @@ function ceateModalMarkup(film) {
   </div>
 </div>`;
 }
-
 function openModal() {
    const closeModalBtnRef = document.querySelector('[data-action="close-modal"]');
    const backdrop = document.querySelector('.js-backdrop');
@@ -125,33 +124,40 @@ function openModal() {
    closeModalBtnRef.addEventListener('click', onCloseModal);
    backdrop.addEventListener('click', onBackdropClick);
    window.addEventListener('keydown', onEscPress);
-  document.body.classList.add('show-modal');
-  ////////start
-  let myMovie = GlodObj.movie;//////
-    //if (JSON.parse(localStorage.getItem(myMovie)))
-    //////end
+   document.body.classList.add('show-modal');
+   
+  watchedMoviesStorage.getLocalStorageEntry();
+  
+
 //watch
 const watchBtnRef = document.querySelector('.btn_watched');
 const watchSpanEl = document.querySelector('.change_watch');
   watchBtnRef.addEventListener('click', onChangeTitleWatch);
   
- if(watchedMoviesStorage.updateLocalStorageEntry())
-  {
-    watchSpanEl.textContent = 'remove from watched';
-  } 
-  else {
-   watchSpanEl.textContent = 'add to watched';
-  }
-   
+    let myMovie = GlodObj.movie
+    let myIdMovie = GlodObj.id;//////
+
+  const arrWatchLocal = watchedMoviesStorage.getLocalStorageEntry();
+ 
+  arrWatchLocal.forEach(({ id }) => {
+         if (id === Number(myIdMovie)) {
+       watchSpanEl.textContent = 'remove from watched';
+     }
+ });
   function onChangeTitleWatch() {
-  watchedMoviesStorage.updateLocalStorageEntry();
+  //watchedMoviesStorage.updateLocalStorageEntry();
    if (watchSpanEl.textContent == 'add to watched') {
       watchSpanEl.textContent = 'remove from watched';
       watchedMoviesStorage.addMovieToLocalStorage(myMovie);
-      //watch.addMovieToLocalStorage(movie222);
    } else {
-      watchSpanEl.textContent = 'add to watched';
+     arrWatchLocal.forEach(({ id }) => {
+       if (id === Number(myIdMovie)) {
+       watchSpanEl.textContent = 'add to watched';
       watchedMoviesStorage.deleteMovieFromLocalStorage(myMovie);
+       console.log('совпали номера', id, '=', Number(myIdMovie));
+     }
+ });
+      
    }
   }
   // queue
@@ -159,27 +165,28 @@ const watchSpanEl = document.querySelector('.change_watch');
 const queueBtnRef = document.querySelector('.btn_queue');
 const queueSpanEl = document.querySelector('.change_queue');
 queueBtnRef.addEventListener('click', onChangeTitleQueue);
+ //queueMoviesStorage.updateLocalStorageEntry();
 
-  //queueMoviesStorage.updateLocalStorageEntry();
-  
-  if(queueMoviesStorage.updateLocalStorageEntry())
-  {
-   queueSpanEl.textContent = 'remove from queue';
-  } 
-  else {
-     queueSpanEl.textContent = 'add to queue';
-    }
-  
+ const arrQueueLocal = queueMoviesStorage.getLocalStorageEntry();
+    arrQueueLocal.forEach(({ id }) => {
+         if (id === Number(myIdMovie)) {
+       queueSpanEl.textContent = 'remove from queue';
+     }
+ });
   function onChangeTitleQueue() {
-   //console.log(queueMoviesStorage.getLocalStorageEntry(movie2));
-  
-  if (queueSpanEl.textContent == 'add to queue')
-    {
+   
+  if (queueSpanEl.textContent == 'add to queue'){
       queueSpanEl.textContent = 'remove from queue';
       queueMoviesStorage.addMovieToLocalStorage(myMovie);
    } else {
-      queueSpanEl.textContent = 'add to queue';
-      queueMoviesStorage.deleteMovieFromLocalStorage(myMovie);
+     arrQueueLocal.forEach(({ id }) => {
+       if (id === Number(myIdMovie)) {
+       queueSpanEl.textContent = 'add to queue';
+       queueMoviesStorage.deleteMovieFromLocalStorage(myMovie);
+       console.log('совпали номера', id, '=', Number(myIdMovie));
+     }
+ });
+      
    }
 }
 
