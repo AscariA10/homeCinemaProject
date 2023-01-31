@@ -20,7 +20,7 @@ export default class Pagination {
     this.isPopularFilms = isPopularFilms;
 
     if (isPopularFilms) {
-      this.page = this.#getPageFromLocalStorage();
+      this.page = this.#getPageFromLocalStorage() || 1;
       // this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
     }
 
