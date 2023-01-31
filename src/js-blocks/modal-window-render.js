@@ -12,6 +12,7 @@ export const refs = {
    modalFilm: document.getElementById('modal-single-film'),
 };
 
+
 refs.filmList.addEventListener('click', onFilmCardClick);
 
 async function onFilmCardClick(e) {
@@ -21,15 +22,19 @@ async function onFilmCardClick(e) {
    if (filmId) {
       /**  query for a single movie by id  */
       const filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
+      const filmTrailer = await api.fetchMovieTrailer(filmId);
+      // console.log(filmTrailer[1].key);
       /**  Creating the markup for the modal window  */
-      const markup = ceateModalMarkup(filmData);
+      const markup = ceateModalMarkup(filmData, filmTrailer[1].key);
+      
       /**  Modal window renderer  */
       renderModal(markup, refs.modalFilm);
       openModal();
+      
    }
 }
 
-function ceateModalMarkup(film) {
+function ceateModalMarkup(film, trailer) {
    const {
       title,
       original_title,
@@ -39,7 +44,7 @@ function ceateModalMarkup(film) {
       vote_average,
       vote_count,
       genres,
-      id,
+      id
    } = film;
    const normalizeGenres = genres.map(({ name }) => name).join(', ');
    return `<div class="backdrop js-backdrop">
@@ -63,6 +68,7 @@ function ceateModalMarkup(film) {
       <img src=${
          poster_path ? `https://image.tmdb.org/t/p/original${poster_path}` : img
       } alt="Poster" class="modal_img" />
+      <a href="https://www.youtube.com/watch?v=${trailer}" target="_blank" class="modal_trailer_link is-hidden"> Watch trailer</a>
       <div class="modal_description">
         <h1 class="modal_title">${title}</h1>
         <table class="modal_tbl">
@@ -117,23 +123,34 @@ function ceateModalMarkup(film) {
 function openModal() {
    const closeModalBtnRef = document.querySelector('[data-action="close-modal"]');
    const backdrop = document.querySelector('.js-backdrop');
+   const modalImg = document.querySelector('.modal_without_close-btn .modal_img');
 
    closeModalBtnRef.addEventListener('click', onCloseModal);
    backdrop.addEventListener('click', onBackdropClick);
    window.addEventListener('keydown', onEscPress);
+   modalImg.addEventListener('mouseover', onMouseOverModalImg);
+
    document.body.classList.add('show-modal');
+}
+
+function onMouseOverModalImg() {
+  const modalTrailerLink = document.querySelector('.modal_trailer_link');
+  modalTrailerLink.classList.remove('is-hidden');
 }
 
 function onCloseModal() {
    const closeModalBtnRef = document.querySelector('[data-action="close-modal"]');
    const backdrop = document.querySelector('.js-backdrop');
+   const modalImg = document.querySelector('.modal_without_close-btn .modal_img');
+
    closeModalBtnRef.removeEventListener('click', onCloseModal);
    backdrop.removeEventListener('click', onBackdropClick);
-
+   modalImg.removeEventListener('mouseover', onMouseOverModalImg);
    window.removeEventListener('keydown', onEscPress);
    document.body.classList.remove('show-modal');
    clearModal(refs.modalFilm);
 }
+
 
 function onBackdropClick(evt) {
    if (evt.currentTarget === evt.target) {
@@ -155,3 +172,4 @@ function renderModal(markup, renderParrent) {
 function clearModal(rootModal) {
    rootModal.innerHTML = '';
 }
+
