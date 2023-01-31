@@ -1,7 +1,11 @@
 import Api from './fetch';
 import img from '../images/replace.jpg';
+import { LocalStorageEntry } from './localStorageEntry';
 
 const api = new Api();
+
+const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
+const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage');
 
 export const refs = {
    filmList: document.querySelector('.gallery-list'),
