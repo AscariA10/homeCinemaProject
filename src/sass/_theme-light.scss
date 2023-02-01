@@ -65,6 +65,10 @@ body {
     color: #FF6B01;
 }
 
+.pagination__list {
+    color: #222;
+}
+
 .pagination__nav-btn {
     background-color: #dedcdc;
 
@@ -108,6 +112,14 @@ body {
 }
 
 .change-theme[data-theme="dark"] {
+    display: block;
+}
+
+.change-theme-library[data-theme="light"] {
+    display: none;
+}
+
+.change-theme-library[data-theme="dark"] {
     display: block;
 }
 }
