@@ -91,12 +91,16 @@ class LibraryRenderQueue extends LibraryRender {
 }
 
 function onWatched(event) {
+  queueBtn.style.backgroundColor = 'transparent';
+  watchedBtn.style.backgroundColor = '#ff6b01';
   const watchedMovies = new LibraryRenderWatched();
   const pagination = new Pagination();
   pagination.setFunction(watchedMovies.getMovies, watchedMovies);
 }
 
 function onQueue(event) {
+  watchedBtn.style.backgroundColor = 'transparent';
+  queueBtn.style.backgroundColor = '#ff6b01';
   const queueMovies = new LibraryRenderQueue();
   const pagination = new Pagination();
   pagination.setFunction(queueMovies.getMovies, queueMovies);
