@@ -10,7 +10,7 @@ const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
 
 const apiMovies = new ApiMovies();
 
-const galleryData = document.querySelector('.notification-wrapper');
+const recommendedData = document.querySelector('.notification-wrapper');
 const watchedBtn = document.querySelector('#watched');
 const queueBtn = document.querySelector('#queue');
 
@@ -67,32 +67,38 @@ class LibraryRenderQueue extends LibraryRender {
 async function onWatched(event) {
   queueBtn.style.backgroundColor = 'transparent';
   watchedBtn.style.backgroundColor = '#ff6b01';
+
   const watchedMovies = new LibraryRenderWatched();
   const pagination = new Pagination();
+
   if (!watchedMovies.getMovies().length) {
     Notify.info("You haven't added any movie to watched yet. Let's do it!");
     const markup = `<span class="recommended-films">Recommended films</span>`;
-    galleryData.innerHTML = markup;
+    recommendedData.innerHTML = markup;
     await renderRecommendedFilms();
     return;
   }
-  galleryData.innerHTML = '';
+
+  recommendedData.innerHTML = '';
   pagination.setFunction(watchedMovies.getMovies, watchedMovies);
 }
 
 async function onQueue(event) {
   watchedBtn.style.backgroundColor = 'transparent';
   queueBtn.style.backgroundColor = '#ff6b01';
+
   const queueMovies = new LibraryRenderQueue();
   const pagination = new Pagination();
+
   if (!queueMovies.getMovies().length) {
     Notify.info("You haven't added any movie to queue yet. Let's do it!");
     const markup = `<span class="recommended-films">Recommended films</span>`;
-    galleryData.innerHTML = markup;
+    recommendedData.innerHTML = markup;
     await renderRecommendedFilms();
     return;
   }
-  galleryData.innerHTML = '';
+
+  recommendedData.innerHTML = '';
   pagination.setFunction(queueMovies.getMovies, queueMovies);
 }
 
