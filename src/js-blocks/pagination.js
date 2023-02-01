@@ -11,6 +11,8 @@ export default class Pagination {
     this.paginationArrowPrev = document.querySelector('.js-prev-btn');
     this.paginationArrowNext = document.querySelector('.js-next-btn');
 
+    this.#hidePagination();
+
     this.paginationPagesList.onclick = this.#onClick;
     this.paginationArrowPrev.onclick = this.#onPrev;
     this.paginationArrowNext.onclick = this.#onNext;
@@ -69,7 +71,7 @@ export default class Pagination {
   };
 
   #render = async () => {
-    this.hidePagination();
+    this.#hidePagination();
 
     this.linkToIntance.pageNumber = this.page;
     this.res = await this.fn();
@@ -94,7 +96,7 @@ export default class Pagination {
     localStorageCurrentPage.addPageNumberToLocalStorage(currentPage);
   }
 
-  hidePagination = () => {
+  #hidePagination = () => {
     this.paginationPagesList.innerHTML = '';
     this.paginationArrowPrev.classList.add('visually-hidden');
     this.paginationArrowNext.classList.add('visually-hidden');
