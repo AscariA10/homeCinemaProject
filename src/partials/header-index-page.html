@@ -23,41 +23,40 @@
               >My Library</a
             >
           </li>
+          <li class="header__nav--item">
+            <div class="theme">
+              <svg class="change-theme sun-svg" data-theme="light">
+                <use href="./images/sprite.svg#icon-sun"></use>
+              </svg>
+              <svg class="change-theme moon-svg" data-theme="dark">
+                <use href="./images/sprite.svg#icon-moon"></use>
+              </svg>
+            </div>
+          </li>
         </ul>
       </nav>
     </div>
 
-    <!-- ----------------SEARCH AND SWITCHER----------------- -->
+    <!-- ----------------SEARCH----------------- -->
 
-    <div class="header__searchswitcher">
-      <div class="theme">
-        <svg class="change-theme sun-svg" data-theme="light">
-          <use href="./images/sprite.svg#icon-sun"></use>
-        </svg>
-        <svg class="change-theme moon-svg" data-theme="dark">
-          <use href="./images/sprite.svg#icon-moon"></use>
-        </svg>
-      </div>
-      <div class="header__search">
-        <form class="header__search--form js-search__form" name="search">
-          <input
-            class="header__search--input js-search__input"
-            name="searchInput"
-            type="text"
-            placeholder="Movie search"
-          />
-          <button type="submit" class="header__search--btn">
-            <svg width="12" height="12" class="header__search--icon">
-              <use href="./images/sprite.svg#icon-search"></use>
-            </svg>
-          </button>
+    <div class="header__search">
+      <form class="header__search--form js-search__form" name="search">
+        <input
+          class="header__search--input js-search__input"
+          name="searchInput"
+          type="text"
+          placeholder="Movie search"
+        />
+        <button type="submit" class="header__search--btn">
+          <svg width="12" height="12" class="header__search--icon">
+            <use href="./images/sprite.svg#icon-search"></use>
+          </svg>
+        </button>
 
-          <p class="warning-message hidden">
-            No matches found for your query. Enter the properly name of the
-            movie.
-          </p>
-        </form>
-      </div>
+        <p class="warning-message hidden">
+          No matches found for your query. Enter the properly name of the movie.
+        </p>
+      </form>
     </div>
   </div>
 </header>

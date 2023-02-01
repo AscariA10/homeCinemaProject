@@ -9,21 +9,21 @@
 }
 
 .sun-svg {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     fill: #FFF;
-    @media screen and (max-width: 767px) {
-        width: 32px;
-        height: 32px;
+    @media screen and (max-width: 767px){
+        width: 20px;
+        height: 20px;
     }
 }
 
 .moon-svg {
-    width: 40px;
-    height: 38px;
+    width: 28px;
+    height: 26px;
     fill: #FFF;
     @media screen and (max-width: 767px) {
-        width: 32px;
-        height: 30px;
+        width: 20px;
+        height: 18px;
     }
 }

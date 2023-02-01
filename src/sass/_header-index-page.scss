@@ -98,11 +98,14 @@
 
 .header__nav--item:last-child {
    margin-right: 0;
+   @media screen and (max-width: 767px) {
+      margin-bottom: 18px;
+   }
 }
 
 .header__nav {
    display: flex;
-   justify-content: space-between;
+   justify-content: space-around;
    align-items: center;
    flex-wrap: wrap;
    padding-top: 44px;
@@ -111,6 +114,7 @@
 .header__nav--list {
    display: flex;
    margin-left: auto;
+   align-items: center;
 }
 
 .header__search--form {
@@ -224,16 +228,5 @@
 
    @media screen and (min-width: 768px) {
       width: 393px;
-   }
-}
-
-.header__searchswitcher {
-   display: flex;
-   align-items: end;
-
-   @media screen and (max-width: 767px) {
-      flex-direction: column;
-      align-items: start;
-      margin-top: 20px;
    }
 }
