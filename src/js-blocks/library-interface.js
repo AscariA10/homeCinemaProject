@@ -1,5 +1,6 @@
 import Pagination from './pagination.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
+import './modal-window-render.js';
 
 const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage');
 const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
@@ -7,6 +8,7 @@ const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
 const watchedBtn = document.querySelector('#watched');
 const queueBtn = document.querySelector('#queue');
 
+window.addEventListener('DOMContentLoaded', onWatched);
 watchedBtn.addEventListener('click', onWatched);
 queueBtn.addEventListener('click', onQueue);
 
