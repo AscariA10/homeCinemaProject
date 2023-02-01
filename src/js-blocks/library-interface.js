@@ -3,6 +3,7 @@ import { cardList } from './card-draw.js';
 import Pagination from './pagination.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+const debounce = require('lodash.debounce');
 import './modal-window-render.js';
 
 const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage');
@@ -21,16 +22,10 @@ queueBtn.addEventListener('click', onQueue);
 class LibraryRender {
   constructor() {
     this.page = 1;
-    const viewportWidth = window.innerWidth;
 
-    if (viewportWidth <= 767) this.countFilmsPerPage = 4;
-    if (viewportWidth >= 768) this.countFilmsPerPage = 8;
-    if (viewportWidth >= 1280) this.countFilmsPerPage = 9;
+    this.resize();
 
-    this.movies = this.getMoviesFromLocalStorage();
-    const totalLength = this.movies.length;
-    const totalPages = Math.ceil(totalLength / this.countFilmsPerPage);
-    this.totalPages = totalPages;
+    this.calculateTotalPages();
   }
 
   /** Returns page number for pagination */
@@ -48,6 +43,21 @@ class LibraryRender {
     return this.totalPages;
   }
 
+  resize() {
+    const viewportWidth = window.innerWidth;
+
+    if (viewportWidth <= 767) this.countFilmsPerPage = 4;
+    if (viewportWidth >= 768) this.countFilmsPerPage = 8;
+    if (viewportWidth >= 1280) this.countFilmsPerPage = 9;
+  }
+
+  calculateTotalPages() {
+    this.movies = this.getMoviesFromLocalStorage();
+    const totalLength = this.movies.length;
+    const totalPages = Math.ceil(totalLength / this.countFilmsPerPage);
+    this.totalPages = totalPages;
+  }
+
   getMovies() {
     const movies = [...this.movies].splice(
       (this.page - 1) * this.countFilmsPerPage,
@@ -55,7 +65,6 @@ class LibraryRender {
     );
     return movies;
   }
-
   renderRecommendedFilms = async () => {
     const response = await apiMovies.fetchTrendMovies();
     cardList([...response].splice(0, this.countFilmsPerPage));
@@ -66,12 +75,26 @@ class LibraryRenderWatched extends LibraryRender {
   getMoviesFromLocalStorage() {
     return watchedMoviesStorage.getLocalStorageEntry() || [];
   }
+
+  renderRecommended = async () => {
+    Notify.info("You haven't added any movie to watched yet. Let's do it!");
+    const markup = `<span class="recommended-films">Recommended films</span>`;
+    recommendedData.innerHTML = markup;
+    this.renderRecommendedFilms();
+  };
 }
 
 class LibraryRenderQueue extends LibraryRender {
   getMoviesFromLocalStorage() {
     return queueMoviesStorage.getLocalStorageEntry() || [];
   }
+
+  renderRecommended = async () => {
+    Notify.info("You haven't added any movie to queue yet. Let's do it!");
+    const markup = `<span class="recommended-films">Recommended films</span>`;
+    recommendedData.innerHTML = markup;
+    this.renderRecommendedFilms();
+  };
 }
 
 async function onWatched(event) {
@@ -82,15 +105,23 @@ async function onWatched(event) {
   const pagination = new Pagination();
 
   if (!watchedMovies.getMovies().length) {
-    Notify.info("You haven't added any movie to watched yet. Let's do it!");
-    const markup = `<span class="recommended-films">Recommended films</span>`;
-    recommendedData.innerHTML = markup;
-    await watchedMovies.renderRecommendedFilms();
+    await watchedMovies.renderRecommended();
+    window.onresize = debounce(function () {
+      watchedMovies.resize();
+      watchedMovies.renderRecommended();
+    }, 500);
     return;
   }
 
   recommendedData.innerHTML = '';
   pagination.setFunction(watchedMovies.getMovies, watchedMovies);
+
+  const debouncedSetFunction = debounce(() => {
+    watchedMovies.resize();
+    watchedMovies.calculateTotalPages();
+    pagination.setFunction(watchedMovies.getMovies, watchedMovies);
+  }, 500);
+  window.onresize = debouncedSetFunction;
 }
 
 async function onQueue(event) {
@@ -101,13 +132,21 @@ async function onQueue(event) {
   const pagination = new Pagination();
 
   if (!queueMovies.getMovies().length) {
-    Notify.info("You haven't added any movie to queue yet. Let's do it!");
-    const markup = `<span class="recommended-films">Recommended films</span>`;
-    recommendedData.innerHTML = markup;
-    await queueMovies.renderRecommendedFilms();
+    await queueMovies.renderRecommended();
+    window.onresize = debounce(function () {
+      queueMovies.resize();
+      queueMovies.renderRecommended();
+    }, 500);
     return;
   }
 
   recommendedData.innerHTML = '';
   pagination.setFunction(queueMovies.getMovies, queueMovies);
+
+  const debouncedSetFunction = debounce(() => {
+    queueMovies.resize();
+    queueMovies.calculateTotalPages();
+    pagination.setFunction(queueMovies.getMovies, queueMovies);
+  }, 500);
+  window.onresize = debouncedSetFunction;
 }
