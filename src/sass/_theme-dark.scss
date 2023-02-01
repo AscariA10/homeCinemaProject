@@ -65,6 +65,10 @@ body {
     color: #FF6B01;
 }
 
+.pagination__list {
+    color: #FFF;
+}
+
 .pagination__nav-btn {
     background-color: #222;
 
@@ -103,12 +107,19 @@ body {
 }
 
 /*--- main-index-page ---*/
-
 .change-theme[data-theme="dark"] {
     display: none;
 }
 
 .change-theme[data-theme="light"] {
+    display: block;
+}
+
+.change-theme-library[data-theme="dark"] {
+    display: none;
+}
+
+.change-theme-library[data-theme="light"] {
     display: block;
 }
 }
