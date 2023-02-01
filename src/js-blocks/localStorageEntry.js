@@ -1,32 +1,37 @@
-import Notiflix, { Notify } from 'notiflix';
+import Notiflix from 'notiflix';
 
 export class LocalStorageEntry {
   list = [];
   length = 0;
+  id = 0;
 
   constructor(key) {
     this.key = key;
+    this.list = this.getLocalStorageEntry(key) ?? [];
   }
-
   // add new Movie to localStorage
   addMovieToLocalStorage(movie) {
-    this.list.unshift(movie);
+    this.list = [movie, ...this.list];
+    Notiflix.Notify.success('movie added successfully');
     this.updateLocalStorageEntry();
   }
 
-  // delete the movie from localStorage
-  deleteMovieFromLocalStorage(movie) {
-    if (this.list.includes(movie)) {
-      this.list.splice(this.list.indexOf(movie), 1);
+  deleteMovieFromLocalStorage({ id }) {
+    const newList = this.list.filter(el => el.id !== id);
+    if (newList.length !== this.list) {
+      this.list = newList;
       this.updateLocalStorageEntry();
-    } else Notiflix.Notify.failure("can't find the movie to delete");
+      Notiflix.Notify.success('movie removed successfully');
+      return;
+    }
+    Notiflix.Notify.failure("can't find the movie to delete");
   }
 
   // add movies array to localStorage
   addFilmsToLocalStorage(movie) {
     localStorage.setItem(this.key, JSON.stringify(movie));
   }
-  
+
   // add page number to localStorage
   addPageNumberToLocalStorage(key, pageNumber) {
     localStorage.setItem(key, JSON.stringify(pageNumber));
