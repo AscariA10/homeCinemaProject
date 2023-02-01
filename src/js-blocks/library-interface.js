@@ -38,8 +38,6 @@ class LibraryRender {
   }
 
   getMovies() {
-    console.log(this.page);
-    console.log(this.movies);
     const movies = [...this.movies].splice(
       (this.page - 1) * this.countFilmsPerPage,
       this.countFilmsPerPage
