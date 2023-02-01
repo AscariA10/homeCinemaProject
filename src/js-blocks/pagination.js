@@ -96,11 +96,11 @@ export default class Pagination {
     localStorageCurrentPage.addPageNumberToLocalStorage(currentPage);
   }
 
-  #hidePagination = () => {
+  #hidePagination() {
     this.paginationPagesList.innerHTML = '';
     this.paginationArrowPrev.classList.add('visually-hidden');
     this.paginationArrowNext.classList.add('visually-hidden');
-  };
+  }
 
   #createPagination(page, totalPages) {
     let markup = '';
