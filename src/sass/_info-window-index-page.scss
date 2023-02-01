@@ -269,3 +269,22 @@ body.show-modal .modal_window {
         width: 136px;
     }
 }
+
+.modal_trailer_link {
+    position: absolute;
+    background-color: var(--active-btn-color);
+    color: var(--light-color);
+    padding: 10px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 3px;
+
+    opacity: 1;
+    transform: translateX(0%);
+    transition: transform 750ms cubic-bezier(0.4, 0, 0.2, 1), opacity 750ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.is-hidden {
+        transform: translateX(-10%);
+        opacity: 0;
+    }
+}

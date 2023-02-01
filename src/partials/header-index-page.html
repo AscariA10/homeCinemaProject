@@ -1,49 +1,62 @@
 <header class="header">
-   <!-- ------------------CONTAINER------------------- -->
-   <div class="container">
-      <!-- ------------------WRAPPER-------------------- -->
-      <div class="header__wrap">
-         <!-- -------------------NAVIGATION----------------- -->
-         <nav class="header__nav">
-            <!-- ----------------LOGO--------------------- -->
+  <!-- ------------------CONTAINER------------------- -->
+  <div class="container">
+    <!-- ------------------WRAPPER-------------------- -->
+    <div class="header__wrap">
+      <!-- -------------------NAVIGATION----------------- -->
+      <nav class="header__nav">
+        <!-- ----------------LOGO--------------------- -->
 
-            <a href="./index.html" class="header__logo"
-               ><svg width="24" height="24" class="header__logo--icon">
-                  <use href="./images/sprite.svg#icon-film"></use>
-                  <span class="header__logo--name">Filmoteka</span>
-               </svg>
-            </a>
+        <a href="./index.html" class="header__logo"
+          ><svg width="24" height="24" class="header__logo--icon">
+            <use href="./images/sprite.svg#icon-film"></use>
+            <span class="header__logo--name">Filmoteka</span>
+          </svg>
+        </a>
 
-            <ul class="header__nav--list">
-               <li class="header__nav--item">
-                  <a class="header__nav--link current" href="./index.html">Home</a>
-               </li>
-               <li class="header__nav--item">
-                  <a class="header__nav--link" href="./partials/library.html">My Library</a>
-               </li>
-            </ul>
-         </nav>
-      </div>
+        <ul class="header__nav--list">
+          <li class="header__nav--item">
+            <a class="header__nav--link current" href="./index.html">Home</a>
+          </li>
+          <li class="header__nav--item">
+            <a class="header__nav--link" href="./partials/library.html"
+              >My Library</a
+            >
+          </li>
+          <li class="header__nav--item">
+            <div class="theme">
+              <svg class="change-theme sun-svg" data-theme="light">
+                <use href="./images/sprite.svg#icon-sun"></use>
+              </svg>
+              <svg class="change-theme moon-svg" data-theme="dark">
+                <use href="./images/sprite.svg#icon-moon"></use>
+              </svg>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
-      <!-- ----------------SEARCH----------------- -->
-      <div class="header__search">
-         <form class="header__search--form js-search__form" name="search">
-            <input
-               class="header__search--input js-search__input"
-               name="searchInput"
-               type="text"
-               placeholder="Movie search"
-            />
-            <button type="submit" class="header__search--btn">
-               <svg width="12" height="12" class="header__search--icon">
-                  <use href="./images/sprite.svg#icon-search"></use>
-               </svg>
-            </button>
+    <!-- ----------------SEARCH----------------- -->
 
-            <p class="warning-message hidden">
-               No matches found for your query. Enter the properly name of the movie.
-            </p>
-         </form>
-      </div>
-   </div>
+    <div class="header__search">
+      <form class="header__search--form js-search__form" name="search">
+        <input
+          class="header__search--input js-search__input"
+          name="searchInput"
+          type="text"
+          placeholder="Movie search"
+        />
+        <button type="submit" class="header__search--btn">
+          <svg width="12" height="12" class="header__search--icon">
+            <use href="./images/sprite.svg#icon-search"></use>
+          </svg>
+        </button>
+
+        <p class="warning-message hidden">
+          No matches found for your query. Enter the properly name of the movie.
+        </p>
+      </form>
+    </div>
+  </div>
 </header>

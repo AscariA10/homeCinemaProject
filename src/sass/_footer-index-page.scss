@@ -1,0 +1,80 @@
+.footer-wrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.footer-text {
+   font-size: 22px;
+   text-align: center;
+}
+
+.overlay {
+   position: fixed;
+   top: 0;
+   right: 0;
+   width: 100%;
+   height: 100%;
+   background-color: var(--overlay-color);
+}
+
+.overlay.is-hidden {
+   opacity: 0;
+   pointer-events: none;
+}
+
+.modal-our-team {
+   min-width: 1200px;
+   min-height: 100px;
+   background-color: aliceblue;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   padding: 30px;
+}
+.team-open-button {
+   background-color: transparent;
+}
+.team-list {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+.thumb {
+   height: 150px;
+   width: 140px;
+   margin: 20px;
+   border-radius: 10px;
+}
+.teammate {
+   width: 220px;
+   margin: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+.teammate-photo {
+   display: block;
+   height: 100%;
+   width: 100%;
+   object-fit: cover;
+   border-radius: 10px;
+}
+.teammate-name {
+   font-size: 21px;
+   margin-bottom: 7px;
+}
+.teammate-role {
+   font-size: 18px;
+}
+.close-team-button {
+   background-color: var(--active-btn-color);
+   font-size: 25px;
+   margin-left: auto;
+   margin-right: auto;
+   display: block;
+   width: 100px;
+   height: 40px;
+   border-radius: 5px;
+}
