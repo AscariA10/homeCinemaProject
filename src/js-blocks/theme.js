@@ -8,7 +8,7 @@ themeSwitchers.forEach(switcher => {
    });
 });
 
-/* Switcher */
+/* Switcher work */
 function applyTheme() {
    document.body.classList.toggle('dark');
    document.body.classList.toggle('light');
