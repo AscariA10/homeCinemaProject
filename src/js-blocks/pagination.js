@@ -2,6 +2,7 @@
 import { cardList } from './card-draw.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
 const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
+import { fetchTrendFilms } from './input-search.js';
 
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
@@ -36,6 +37,8 @@ export default class Pagination {
    * Third and further params - args of requested function
    */
   setFunction = async (fn, ...arrOfArgs) => {
+    this.page = 1;
+
     this.fn = fn.bind(...arrOfArgs);
     this.linkToIntance = arrOfArgs[0];
     this.#render();
@@ -73,7 +76,12 @@ export default class Pagination {
     this.#hidePagination();
 
     this.linkToIntance.pageNumber = this.page;
+
     this.res = await this.fn();
+    console.log(this.res);
+
+    if (!this.res.length) fetchTrendFilms();
+
     this.totalPages = this.linkToIntance.totalPagesNumber;
     cardList(this.res);
 
