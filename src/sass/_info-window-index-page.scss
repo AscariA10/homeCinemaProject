@@ -162,6 +162,7 @@ body.show-modal .modal_window {
     display: flex;
     align-items: center;
     justify-content: space-between;
+     
 }
 
 .btn_choice {
@@ -173,6 +174,7 @@ body.show-modal .modal_window {
     border-radius: 5px;
     border: solid 1px var(--dark-color);
     padding: 8px;
+   
 }
 
 .btn_choice:hover {
@@ -211,6 +213,7 @@ body.show-modal .modal_window {
 
     .btn_choice {
         width: 110px;
+        
     }
 }
 

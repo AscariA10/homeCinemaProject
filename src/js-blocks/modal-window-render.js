@@ -4,48 +4,64 @@ import { LocalStorageEntry } from './localStorageEntry';
 
 const api = new Api();
 
-const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
 const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage');
+const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
+
+const BTN_TITLE_ADD_TO_WATCH = 'add to watch';
+const BTN_TITLE_REMOVE_FROM_WATCH = 'remove from watch';
+const BTN_TITLE_ADD_TO_QUEUE = 'add to queue';
+const BTN_TITLE_REMOVE_FROM_QUEUE = 'remove from queue';
+
+function getDataById(data, key, value) {
+   return data.find(el => el[key] === value);
+}
 
 export const refs = {
-  filmList: document.querySelector('.gallery-list'),
-  modalFilm: document.getElementById('modal-single-film'),
+   filmList: document.querySelector('.gallery-list'),
+   modalFilm: document.getElementById('modal-single-film'),
 };
 
 refs.filmList.addEventListener('click', onFilmCardClick);
 
-async function onFilmCardClick(e) {
-  e.preventDefault();
-  /**  search for the nearest ancestor with the class .gallery-card and get the id from it */
-  const filmId = e.target.closest('.gallery-card').dataset.id;
-  if (filmId) {
-    /**  query for a single movie by id  */
-    const filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
-    const filmTrailer = await api.fetchMovieTrailer(filmId);
-    // console.log(filmTrailer[1].key);
-    /**  Creating the markup for the modal window  */
-    const markup = ceateModalMarkup(filmData, filmTrailer[1].key);
+let GlodObj = {}; ///
 
-    /**  Modal window renderer  */
-    renderModal(markup, refs.modalFilm);
-    openModal();
-  }
+async function onFilmCardClick(e) {
+   e.preventDefault();
+   /**  search for the nearest ancestor with the class .gallery-card and get the id from it */
+   const filmId = e.target.closest('.gallery-card').dataset.id;
+   if (filmId) {
+      /**  query for a single movie by id  */
+
+      filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
+      GlodObj.movie = filmData; /////////
+      GlodObj.id = filmId; /////////
+
+      const filmTrailer = await api.fetchMovieTrailer(filmId);
+      // console.log(filmTrailer[1].key);
+      /**  Creating the markup for the modal window  */
+      const markup = ceateModalMarkup(filmData, filmTrailer[1].key);
+
+      /**  Modal window renderer  */
+      renderModal(markup, refs.modalFilm);
+      openModal();
+   }
 }
 
 function ceateModalMarkup(film, trailer) {
-  const {
-    title,
-    original_title,
-    overview,
-    poster_path,
-    popularity,
-    vote_average,
-    vote_count,
-    genres,
-    id,
-  } = film;
-  const normalizeGenres = genres.map(({ name }) => name).join(', ');
-  return `<div class="backdrop js-backdrop">
+   const {
+      title,
+      original_title,
+      overview,
+      poster_path,
+      popularity,
+      vote_average,
+      vote_count,
+      genres,
+      id,
+   } = film;
+
+   const normalizeGenres = genres.map(({ name }) => name).join(', ');
+   return `<div class="backdrop js-backdrop">
   <div class="modal_window">
     <button
       type="button"
@@ -66,7 +82,7 @@ function ceateModalMarkup(film, trailer) {
     </button>
     <div class="modal_without_close-btn">
       <img src=${
-        poster_path ? `https://image.tmdb.org/t/p/original${poster_path}` : img
+         poster_path ? `https://image.tmdb.org/t/p/original${poster_path}` : img
       } alt="Poster" class="modal_img" />
       <a href="https://www.youtube.com/watch?v=${trailer}" target="_blank" class="modal_trailer_link is-hidden"> Watch trailer</a>
       <div class="modal_description">
@@ -105,7 +121,7 @@ function ceateModalMarkup(film, trailer) {
         <ul class="btn_list">
           <li>
             <button type="button" class="btn_choice btn_watched">
-              <span class="change_watch">add to Watched</span>
+              <span class="change_watch">add to watched</span>
             </button>
           </li>
           <li>
@@ -115,67 +131,127 @@ function ceateModalMarkup(film, trailer) {
           </li>
         </ul>
       </div>
-    </div>
-  </div>
+      </div>
+      </div>
 </div>`;
 }
 
 function openModal() {
-  const closeModalBtnRef = document.querySelector(
-    '[data-action="close-modal"]'
-  );
-  const backdrop = document.querySelector('.js-backdrop');
-  const modalImg = document.querySelector(
-    '.modal_without_close-btn .modal_img'
-  );
+   const closeModalBtnRef = document.querySelector('[data-action="close-modal"]');
+   const backdrop = document.querySelector('.js-backdrop');
 
-  closeModalBtnRef.addEventListener('click', onCloseModal);
-  backdrop.addEventListener('click', onBackdropClick);
-  window.addEventListener('keydown', onEscPress);
-  modalImg.addEventListener('mouseover', onMouseOverModalImg);
+   const modalImg = document.querySelector('.modal_without_close-btn .modal_img');
 
-  document.body.classList.add('show-modal');
+   closeModalBtnRef.addEventListener('click', onCloseModal);
+   backdrop.addEventListener('click', onBackdropClick);
+   window.addEventListener('keydown', onEscPress);
+
+   document.body.classList.add('show-modal');
+
+   watchAction();
+   queueAction();
+}
+
+function watchAction() {
+   const { movie, id } = GlodObj;
+
+   const arrWatchLocal = watchedMoviesStorage.getLocalStorageEntry() ?? [];
+
+   const movieInWatch = getDataById(arrWatchLocal, 'id', Number(id));
+
+   let BTN_ACTION_WATCH = !!movieInWatch ? BTN_TITLE_REMOVE_FROM_WATCH : BTN_TITLE_ADD_TO_WATCH;
+
+   const watchBtnRef = document.querySelector('.btn_watched');
+   const watchSpanEl = document.querySelector('.change_watch');
+   watchBtnRef.addEventListener('click', onChangeTitleWatch);
+
+   watchSpanEl.textContent = BTN_ACTION_WATCH;
+
+   function onChangeTitleWatch() {
+      if (BTN_ACTION_WATCH === BTN_TITLE_ADD_TO_WATCH) {
+         watchedMoviesStorage.addMovieToLocalStorage(movie);
+         BTN_ACTION_WATCH = BTN_TITLE_REMOVE_FROM_WATCH;
+         watchSpanEl.textContent = BTN_ACTION_WATCH;
+         return;
+      }
+      watchedMoviesStorage.deleteMovieFromLocalStorage(movie);
+      BTN_ACTION_WATCH = BTN_TITLE_ADD_TO_WATCH;
+      watchSpanEl.textContent = BTN_ACTION_WATCH;
+   }
+}
+
+function queueAction() {
+   const { movie, id } = GlodObj;
+
+   const arrQueueLocal = queueMoviesStorage.getLocalStorageEntry() ?? [];
+
+   const movieInQueue = getDataById(arrQueueLocal, 'id', Number(id));
+
+   let BTN_ACTION_QUEUE = !!movieInQueue ? BTN_TITLE_REMOVE_FROM_QUEUE : BTN_TITLE_ADD_TO_QUEUE;
+
+   const queueBtnRef = document.querySelector('.btn_queue');
+   const queueSpanEl = document.querySelector('.change_queue');
+   queueBtnRef.addEventListener('click', onChangeTitleQueue);
+
+   queueSpanEl.textContent = BTN_ACTION_QUEUE;
+
+   function onChangeTitleQueue() {
+      if (BTN_ACTION_QUEUE === BTN_TITLE_ADD_TO_QUEUE) {
+         queueMoviesStorage.addMovieToLocalStorage(movie);
+         BTN_ACTION_QUEUE = BTN_TITLE_REMOVE_FROM_QUEUE;
+         queueSpanEl.textContent = BTN_ACTION_QUEUE;
+         return;
+      }
+      queueMoviesStorage.deleteMovieFromLocalStorage(movie);
+      BTN_ACTION_QUEUE = BTN_TITLE_ADD_TO_QUEUE;
+      queueSpanEl.textContent = BTN_ACTION_QUEUE;
+   }
+
+   modalImg.addEventListener('mouseover', onMouseOverModalImg);
+
+   document.body.classList.add('show-modal');
 }
 
 function onMouseOverModalImg() {
-  const modalTrailerLink = document.querySelector('.modal_trailer_link');
-  modalTrailerLink.classList.remove('is-hidden');
+   const modalTrailerLink = document.querySelector('.modal_trailer_link');
+   modalTrailerLink.classList.remove('is-hidden');
 }
 
 function onCloseModal() {
-  const closeModalBtnRef = document.querySelector(
-    '[data-action="close-modal"]'
-  );
-  const backdrop = document.querySelector('.js-backdrop');
-  const modalImg = document.querySelector(
-    '.modal_without_close-btn .modal_img'
-  );
+   const closeModalBtnRef = document.querySelector('[data-action="close-modal"]');
+   const backdrop = document.querySelector('.js-backdrop');
 
-  closeModalBtnRef.removeEventListener('click', onCloseModal);
-  backdrop.removeEventListener('click', onBackdropClick);
-  modalImg.removeEventListener('mouseover', onMouseOverModalImg);
-  window.removeEventListener('keydown', onEscPress);
-  document.body.classList.remove('show-modal');
-  clearModal(refs.modalFilm);
+   const modalImg = document.querySelector('.modal_without_close-btn .modal_img');
+
+   closeModalBtnRef.removeEventListener('click', onCloseModal);
+   backdrop.removeEventListener('click', onBackdropClick);
+   modalImg.removeEventListener('mouseover', onMouseOverModalImg);
+
+   window.removeEventListener('keydown', onEscPress);
+   document.body.classList.remove('show-modal');
+   clearModal(refs.modalFilm);
 }
 
 function onBackdropClick(evt) {
-  if (evt.currentTarget === evt.target) {
-    onCloseModal();
-    clearModal(refs.modalFilm);
-  }
+   if (evt.currentTarget === evt.target) {
+      onCloseModal();
+      clearModal(refs.modalFilm);
+   }
 }
+
 function onEscPress(evt) {
-  if (evt.code === 'Escape') {
-    onCloseModal();
-    clearModal(refs.modalFilm);
-  }
+   if (evt.code === 'Escape') {
+      onCloseModal();
+      clearModal(refs.modalFilm);
+   }
 }
+
 /** this method renders the layout of the modal window in <div id="modal-single-film"></div>   */
 function renderModal(markup, renderParrent) {
-  renderParrent.insertAdjacentHTML('beforeend', markup);
+   renderParrent.insertAdjacentHTML('beforeend', markup);
 }
+
 /** this method removes the modal window markup from the <div id="modal-single-film"></div>  */
 function clearModal(rootModal) {
-  rootModal.innerHTML = '';
+   rootModal.innerHTML = '';
 }
