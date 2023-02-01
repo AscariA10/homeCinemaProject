@@ -1,14 +1,13 @@
 :root {
-  --light-color: #fff;
-  --dark-color: #000;
-  --gray-color: #8c8c8c;
-  --active-btn-color: #ff6b01;
-  --shadow-color: rgba(0, 0, 0, 0.25);
-  --background-color-for-hover: rgb(255, 156, 85, 0.2);
-  --box-shadow-color: rgb(85, 91, 255, 0.7) 0px 0px 0px 3px,
-    rgb(31, 193, 27, 0.8) 0px 0px 0px 5px,
-    rgb(255, 217, 19, 0.8) 0px 0px 0px 7px,
-    rgb(255, 156, 85, 0.8) 0px 0px 0px 9px,
-    rgb(255, 85, 85, 0.8) 0px 0px 0px 10px;
-  --options-for-transition: 0.8s ease 0.2ms;
+   --light-color: #fff;
+   --dark-color: #000;
+   --gray-color: #8c8c8c;
+   --active-btn-color: #ff6b01;
+   --shadow-color: rgba(0, 0, 0, 0.25);
+   --background-color-for-hover: rgb(255, 156, 85, 0.2);
+   --box-shadow-color: rgb(85, 91, 255, 0.7) 0px 0px 0px 3px, rgb(31, 193, 27, 0.8) 0px 0px 0px 5px,
+      rgb(255, 217, 19, 0.8) 0px 0px 0px 7px, rgb(255, 156, 85, 0.8) 0px 0px 0px 9px,
+      rgb(255, 85, 85, 0.8) 0px 0px 0px 10px;
+   --overlay-color: rgba(255, 165, 0, 0.6);
+   --options-for-transition: 0.8s ease 0.2ms;
 }
