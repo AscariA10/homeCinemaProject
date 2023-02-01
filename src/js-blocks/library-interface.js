@@ -1,3 +1,5 @@
+import ApiMovies from './fetch.js';
+import { cardList } from './card-draw.js';
 import Pagination from './pagination.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -6,7 +8,9 @@ import './modal-window-render.js';
 const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage');
 const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
 
-const galleryData = document.querySelector('.gallery-list');
+const apiMovies = new ApiMovies();
+
+const galleryData = document.querySelector('.notification-wrapper');
 const watchedBtn = document.querySelector('#watched');
 const queueBtn = document.querySelector('#queue');
 
@@ -60,28 +64,39 @@ class LibraryRenderQueue extends LibraryRender {
   }
 }
 
-function onWatched(event) {
+async function onWatched(event) {
   queueBtn.style.backgroundColor = 'transparent';
   watchedBtn.style.backgroundColor = '#ff6b01';
   const watchedMovies = new LibraryRenderWatched();
   const pagination = new Pagination();
   if (!watchedMovies.getMovies().length) {
     Notify.info("You haven't added any movie to watched yet. Let's do it!");
-    galleryData.innerHTML = '';
+    const markup = `<span class="recommended-films">Recommended films</span>`;
+    galleryData.innerHTML = markup;
+    await renderRecommendedFilms();
     return;
   }
+  galleryData.innerHTML = '';
   pagination.setFunction(watchedMovies.getMovies, watchedMovies);
 }
 
-function onQueue(event) {
+async function onQueue(event) {
   watchedBtn.style.backgroundColor = 'transparent';
   queueBtn.style.backgroundColor = '#ff6b01';
   const queueMovies = new LibraryRenderQueue();
   const pagination = new Pagination();
   if (!queueMovies.getMovies().length) {
-    Notify.info("You haven't added any movie to watched yet. Let's do it!");
-    galleryData.innerHTML = '';
+    Notify.info("You haven't added any movie to queue yet. Let's do it!");
+    const markup = `<span class="recommended-films">Recommended films</span>`;
+    galleryData.innerHTML = markup;
+    await renderRecommendedFilms();
     return;
   }
+  galleryData.innerHTML = '';
   pagination.setFunction(queueMovies.getMovies, queueMovies);
+}
+
+async function renderRecommendedFilms() {
+  const response = await apiMovies.fetchTrendMovies();
+  return cardList([...response].splice(0, 9));
 }
