@@ -19,3 +19,4 @@ import './js-blocks/modal-window-render.js';
 
 import './js-blocks/back-to-top-button';
 import './js-blocks/theme';
+import './js-blocks/team-window';

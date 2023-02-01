@@ -23,7 +23,6 @@ export default class Pagination {
 
     if (isPopularFilms) {
       this.page = this.#getPageFromLocalStorage() || 1;
-      // this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
     }
 
     window.onbeforeunload = this.#onSave;
@@ -134,7 +133,7 @@ export default class Pagination {
       this.paginationArrowPrev.classList.add('visually-hidden');
     }
 
-    if (page >= 4) {
+    if (page >= 4 && totalPages !== 4 && totalPages !== 5) {
       markup += `<li>
         <button type="button" class="pagination__item pagination__number except-mobile">
           1
@@ -165,7 +164,7 @@ export default class Pagination {
       </li>`;
     }
 
-    if (page <= totalPages - 3) {
+    if (page <= totalPages - 3 && totalPages !== 4 && totalPages !== 5) {
       if (page <= totalPages - 4) {
         markup += `<li class="pagination__item pagination__dots except-mobile">...</li>`;
       }
@@ -186,6 +185,7 @@ export default class Pagination {
     this.paginationPagesList.innerHTML = markup;
   }
 }
+<<<<<<< HEAD
 
 // Examples of using class below
 import ApiMovies from './fetch.js';
@@ -418,3 +418,5 @@ const api = new ApiMovies();
 //   //   pagination.setFunction(api.searchMovieByName, api, 'Full');
 //   // }, 14000);
 // })();
+=======
+>>>>>>> main
