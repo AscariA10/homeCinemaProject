@@ -1,10 +1,12 @@
 import Pagination from './pagination.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import './modal-window-render.js';
 
 const watchedMoviesStorage = new LocalStorageEntry('watchedMoviesStorage');
 const queueMoviesStorage = new LocalStorageEntry('queueMoviesStorage');
 
+const galleryData = document.querySelector('.gallery-list');
 const watchedBtn = document.querySelector('#watched');
 const queueBtn = document.querySelector('#queue');
 
@@ -63,6 +65,11 @@ function onWatched(event) {
   watchedBtn.style.backgroundColor = '#ff6b01';
   const watchedMovies = new LibraryRenderWatched();
   const pagination = new Pagination();
+  if (!watchedMovies.getMovies().length) {
+    Notify.info("You haven't added any movie to watched yet. Let's do it!");
+    galleryData.innerHTML = '';
+    return;
+  }
   pagination.setFunction(watchedMovies.getMovies, watchedMovies);
 }
 
@@ -71,5 +78,10 @@ function onQueue(event) {
   queueBtn.style.backgroundColor = '#ff6b01';
   const queueMovies = new LibraryRenderQueue();
   const pagination = new Pagination();
+  if (!queueMovies.getMovies().length) {
+    Notify.info("You haven't added any movie to watched yet. Let's do it!");
+    galleryData.innerHTML = '';
+    return;
+  }
   pagination.setFunction(queueMovies.getMovies, queueMovies);
 }
