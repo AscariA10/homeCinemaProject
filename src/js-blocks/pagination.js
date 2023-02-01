@@ -126,7 +126,7 @@ export default class Pagination {
       this.paginationArrowPrev.classList.add('visually-hidden');
     }
 
-    if (page >= 4) {
+    if (page >= 4 && totalPages !== 4 && totalPages !== 5) {
       markup += `<li>
         <button type="button" class="pagination__item pagination__number except-mobile">
           1
@@ -157,7 +157,7 @@ export default class Pagination {
       </li>`;
     }
 
-    if (page <= totalPages - 3) {
+    if (page <= totalPages - 3 && totalPages !== 4 && totalPages !== 5) {
       if (page <= totalPages - 4) {
         markup += `<li class="pagination__item pagination__dots except-mobile">...</li>`;
       }
