@@ -21,7 +21,12 @@ queueBtn.addEventListener('click', onQueue);
 class LibraryRender {
   constructor() {
     this.page = 1;
-    this.countFilmsPerPage = 21;
+    const viewportWidth = window.innerWidth;
+
+    if (viewportWidth <= 767) this.countFilmsPerPage = 4;
+    if (viewportWidth >= 768) this.countFilmsPerPage = 8;
+    if (viewportWidth >= 1280) this.countFilmsPerPage = 9;
+
     this.movies = this.getMoviesFromLocalStorage();
     const totalLength = this.movies.length;
     const totalPages = Math.ceil(totalLength / this.countFilmsPerPage);
@@ -50,6 +55,11 @@ class LibraryRender {
     );
     return movies;
   }
+
+  renderRecommendedFilms = async () => {
+    const response = await apiMovies.fetchTrendMovies();
+    cardList([...response].splice(0, this.countFilmsPerPage));
+  };
 }
 
 class LibraryRenderWatched extends LibraryRender {
@@ -75,7 +85,7 @@ async function onWatched(event) {
     Notify.info("You haven't added any movie to watched yet. Let's do it!");
     const markup = `<span class="recommended-films">Recommended films</span>`;
     recommendedData.innerHTML = markup;
-    await renderRecommendedFilms();
+    await watchedMovies.renderRecommendedFilms();
     return;
   }
 
@@ -94,15 +104,10 @@ async function onQueue(event) {
     Notify.info("You haven't added any movie to queue yet. Let's do it!");
     const markup = `<span class="recommended-films">Recommended films</span>`;
     recommendedData.innerHTML = markup;
-    await renderRecommendedFilms();
+    await queueMovies.renderRecommendedFilms();
     return;
   }
 
   recommendedData.innerHTML = '';
   pagination.setFunction(queueMovies.getMovies, queueMovies);
-}
-
-async function renderRecommendedFilms() {
-  const response = await apiMovies.fetchTrendMovies();
-  return cardList([...response].splice(0, 9));
 }
