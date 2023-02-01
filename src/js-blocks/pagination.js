@@ -22,7 +22,6 @@ export default class Pagination {
 
     if (isPopularFilms) {
       this.page = this.#getPageFromLocalStorage() || 1;
-      // this.#putPageToLocalStorage(1); // Each next query wiil be the 1st page
     }
 
     window.onbeforeunload = this.#onSave;
@@ -178,28 +177,3 @@ export default class Pagination {
     this.paginationPagesList.innerHTML = markup;
   }
 }
-
-// Examples of using class below
-import ApiMovies from './fetch.js';
-const api = new ApiMovies();
-
-//comment unneccessary code block
-(async function (movieName = 'Avatar') {
-  // // code for fetching trend movies and creating pagination
-  // const pagination = new Pagination(true);
-  // pagination.setFunction(api.fetchTrendMovies, api);
-  //
-  // // code for fetching requested movies and creating pagination
-  // const pagination = new Pagination();
-  // pagination.setFunction(api.searchMovieByName, api, movieName);
-  //
-  // setTimeout(async () => {
-  //   const pagination = new Pagination();
-  //   pagination.setFunction(api.searchMovieByName, api, movieName);
-  // }, 7000);
-  //
-  // setTimeout(async () => {
-  //   const pagination = new Pagination();
-  //   pagination.setFunction(api.searchMovieByName, api, 'Full');
-  // }, 14000);
-})();
