@@ -157,9 +157,10 @@ body.show-modal .modal_windowl {
 /*mob*/
 @media screen and (max-width: 767px) {
    .modal_window {
-      height: 65vh; //TEST
+      height: 90vh; //TEST
       padding: 48px 20px 40px 20px;
       max-width: 280px;
+      overflow-y: scroll; //TEST
    }
 
    .modal_img {
