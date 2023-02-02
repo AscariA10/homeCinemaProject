@@ -1,125 +1,130 @@
-body.dark{
-    background-color: #222;
-/* info-window-index-page */
+body.dark {
+   background-color: #222;
+   transition: box-shadow var(--options-for-transition),
+      background-color var(--options-for-transition), transform var(--options-for-transition);
+   /* info-window-index-page */
 
-.modal_window {
-    background-color: #222;
-    color: #FFF;
-}
+   .modal_window {
+      background-color: #222;
+      color: #fff;
+   }
 
-.modal_btn_close {
-    background-color: #222;
-}
+   .modal_btn_close {
+      background-color: #222;
+   }
 
-.modal_btn_close:hover,
-.modal_btn_close:focus {
-    border: 1px solid #FFF;
-}
+   .modal_btn_close:hover,
+   .modal_btn_close:focus {
+      border: 1px solid #fff;
+   }
 
-.modal_icon_close {
-    fill: #FFF;
-}
+   .modal_icon_close {
+      fill: #fff;
+   }
 
-.modal_tbl_left-side {
-    color: #8C8C8C;
-}
+   .modal_tbl_left-side {
+      color: #8c8c8c;
+   }
 
-.modal_tbl_right_top.vote {
-    background-color: #FF6B01;
-    color: #222;
-}
+   .modal_tbl_right_top.vote {
+      background-color: #ff6b01;
+      color: #222;
+   }
 
-.btn_choice {
-    border: solid 1px #FFF;
-}
+   .btn_choice {
+      border: solid 1px #fff;
+   }
 
-.btn_choice:hover,
-.btn_choice:focus {
-    background-color: #FF6B01;
-    color: #222;
-}
+   .btn_choice:hover,
+   .btn_choice:focus {
+      background-color: #ff6b01;
+      color: #222;
+   }
 
-/*--- info-window-index-page ---*/
+   /*--- info-window-index-page ---*/
 
-/* main-index-page */
+   /* main-index-page */
 
-body {
-    background-color: #222;
-}
+   body {
+      background-color: #222;
+   }
 
-.card-title {
-    color: #FFF;
-}
+   .card-title {
+      color: #fff;
+   }
 
-.card-average {
-    color: #222;
-    background: #FF6B01;
-}
+   .card-average {
+      color: #222;
+      background: #ff6b01;
+   }
 
-.card-ganre {
-    color: #FF6B01;
-}
+   .card-ganre {
+      color: #ff6b01;
+   }
 
-.card-release {
-    border-left: 1px solid #FF6B01;
-    color: #FF6B01;
-}
+   .card-release {
+      border-left: 1px solid #ff6b01;
+      color: #ff6b01;
+   }
 
-.pagination__list {
-    color: #FFF;
-}
+   .pagination__list {
+      color: #fff;
+   }
 
-.pagination__nav-btn {
-    background-color: #222;
+   .pagination__nav-btn {
+      background-color: #222;
 
-    &:hover,
-    &:focus {
-        background-color: #FF6B01;
-    }
-}
+      &:hover,
+      &:focus {
+         background-color: #ff6b01;
+      }
+   }
 
-.pagination__icon {
-    fill: #FFF;
+   .pagination__icon {
+      fill: #fff;
 
-    .pagination__nav-btn:hover &,
-    .pagination__nav-btn:focus & {
-        fill: #222;
-    }
-}
+      .pagination__nav-btn:hover &,
+      .pagination__nav-btn:focus & {
+         fill: #222;
+      }
+   }
 
-.pagination__number {
-    color: #FFF;
-}
+   .pagination__number {
+      color: #fff;
+   }
 
-.pagination__number:hover,
-.pagination__number:focus {
-    background-color: #FF6B01;
-    color: #222;
-}
+   .pagination__number:hover,
+   .pagination__number:focus {
+      background-color: #ff6b01;
+      color: #222;
+   }
 
-.pagination__number_current {
-    background-color: #FF6B01;
-    color: #222;
-}
+   .pagination__number_current {
+      background-color: #ff6b01;
+      color: #222;
+   }
 
-.preloader div {
-    background: #FF6B01;
-}
+   .preloader div {
+      background: #ff6b01;
+   }
 
-/*--- main-index-page ---*/
-.change-theme[data-theme="dark"] {
-    display: none;
-}
+   .recommended-films {
+      color: #fff;
+   }
+   /*--- main-index-page ---*/
+   .change-theme[data-theme='dark'] {
+      display: none;
+   }
 
-.change-theme[data-theme="light"] {
-    display: block;
-}
+   .change-theme[data-theme='light'] {
+      display: block;
+   }
 
-.change-theme-library[data-theme="dark"] {
-    display: none;
-}
+   //    .change-theme-library[data-theme='dark'] {
+   //       display: none;
+   //    }
 
-.change-theme-library[data-theme="light"] {
-    display: block;
-}
+   //    .change-theme-library[data-theme='light'] {
+   //       display: block;
+   //    }
 }
