@@ -168,10 +168,5 @@ export async function onQueue(event) {
   document.removeEventListener('itemInserted', onWatched);
 }
 
-// import './input-search';
-// import './modal-window-render.js';
-
-// import './back-to-top-button';
-// import './theme';
 import './team-window';
 import './theme';
