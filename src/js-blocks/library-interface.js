@@ -123,7 +123,6 @@ export async function onWatched(event) {
 
   const debouncedSetFunction = debounce(() => {
     if (!watchedMovies.resize()) return;
-    pagination.page = 1;
     watchedMovies.calculateTotalPages();
     pagination.setFunction(watchedMovies.getMovies, watchedMovies);
   }, 500);
@@ -151,7 +150,6 @@ export async function onQueue(event) {
 
   const debouncedSetFunction = debounce(() => {
     if (!queueMovies.resize()) return;
-    pagination.page = 1;
     queueMovies.calculateTotalPages();
     pagination.setFunction(queueMovies.getMovies, queueMovies);
   }, 500);
