@@ -1,7 +1,6 @@
 import Api from './fetch';
 import img from '../images/replace.jpg';
 import { LocalStorageEntry } from './localStorageEntry';
-import { onWatched, onQueue } from './library-interface.js';
 
 const api = new Api();
 
@@ -180,13 +179,11 @@ function watchAction() {
       watchedMoviesStorage.addMovieToLocalStorage(movie);
       BTN_ACTION_WATCH = BTN_TITLE_REMOVE_FROM_WATCH;
       watchSpanEl.textContent = BTN_ACTION_WATCH;
-      onWatched();
       return;
     }
     watchedMoviesStorage.deleteMovieFromLocalStorage(movie);
     BTN_ACTION_WATCH = BTN_TITLE_ADD_TO_WATCH;
     watchSpanEl.textContent = BTN_ACTION_WATCH;
-    onWatched();
   }
 }
 
@@ -212,13 +209,11 @@ function queueAction() {
       queueMoviesStorage.addMovieToLocalStorage(movie);
       BTN_ACTION_QUEUE = BTN_TITLE_REMOVE_FROM_QUEUE;
       queueSpanEl.textContent = BTN_ACTION_QUEUE;
-      onQueue();
       return;
     }
     queueMoviesStorage.deleteMovieFromLocalStorage(movie);
     BTN_ACTION_QUEUE = BTN_TITLE_ADD_TO_QUEUE;
     queueSpanEl.textContent = BTN_ACTION_QUEUE;
-    onQueue();
   }
 
   document.body.classList.add('show-modal');
