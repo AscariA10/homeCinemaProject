@@ -25,6 +25,7 @@ export const cardContainer = ({
   vote_average,
   id,
   genre_ids,
+  genres: genresIds,
 }) => {
   const getImgUrl = path => {
     return path ? `${BASE_IMG_URL}${poster_path}` : DEFAULT_IMG_URL;
@@ -40,7 +41,12 @@ export const cardContainer = ({
   const releaseYear = getReleaseDate(release_date);
   const average = vote_average.toFixed(1);
 
-  const genres = сhangeIdtoGener(genre_ids);
+  let arrayOfId = [];
+  if (genresIds) {
+    arrayOfId = genresIds.map(({ id }) => id);
+  }
+
+  const genres = сhangeIdtoGener(genre_ids || arrayOfId);
 
   return renderCard(title, imgUrl, releaseYear, average, id, genres);
 };
