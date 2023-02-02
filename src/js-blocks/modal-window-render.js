@@ -28,7 +28,7 @@ let GlodObj = {}; ///
 async function onFilmCardClick(e) {
    e.preventDefault();
    /**  search for the nearest ancestor with the class .gallery-card and get the id from it */
-   const filmId = e.target.closest('.gallery-card').dataset.id;
+   const filmId = e.target.closest('.gallery-card')?.dataset.id;
    if (filmId) {
       /**  query for a single movie by id  */
 
