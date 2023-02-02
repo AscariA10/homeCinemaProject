@@ -164,3 +164,4 @@ async function onQueue(event) {
 // import './back-to-top-button';
 // import './theme';
 import './team-window';
+import './theme';
