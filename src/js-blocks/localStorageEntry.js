@@ -1,5 +1,18 @@
 import Notiflix from 'notiflix';
 
+const originalSetItem = localStorage.setItem;
+
+localStorage.setItem = function (key, value) {
+  const event = new Event('itemInserted');
+
+  event.value = value; // Optional..
+  event.key = key; // Optional..
+
+  originalSetItem.apply(this, arguments);
+
+  document.dispatchEvent(event);
+};
+
 export class LocalStorageEntry {
   list = [];
   length = 0;
