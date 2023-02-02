@@ -102,7 +102,7 @@ class LibraryRenderQueue extends LibraryRender {
   };
 }
 
-async function onWatched(event) {
+export async function onWatched(event) {
   queueBtn.style.backgroundColor = 'transparent';
   watchedBtn.style.backgroundColor = '#ff6b01';
 
@@ -130,7 +130,7 @@ async function onWatched(event) {
   window.onresize = debouncedSetFunction;
 }
 
-async function onQueue(event) {
+export async function onQueue(event) {
   watchedBtn.style.backgroundColor = 'transparent';
   queueBtn.style.backgroundColor = '#ff6b01';
 
