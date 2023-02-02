@@ -1,5 +1,7 @@
 body.light {
     background-color: #e5e5e5;
+    transition: box-shadow var(--options-for-transition),
+            background-color var(--options-for-transition), transform var(--options-for-transition);
 /* info-window-index-page */
 
 .modal_window {
