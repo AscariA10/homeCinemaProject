@@ -3,6 +3,7 @@ import { cardList } from './card-draw.js';
 import Pagination from './pagination.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { animScroll } from './anim-scroll.js';
 const debounce = require('lodash.debounce');
 import './modal-window-render.js';
 
@@ -71,6 +72,7 @@ class LibraryRender {
   renderRecommendedFilms = async () => {
     const response = await apiMovies.fetchTrendMovies();
     cardList([...response].splice(0, this.countFilmsPerPage));
+    animScroll();
   };
 }
 
