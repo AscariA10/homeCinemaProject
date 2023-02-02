@@ -115,6 +115,9 @@ export async function onWatched(event) {
       if (!watchedMovies.resize()) return;
       watchedMovies.renderRecommended();
     }, 500);
+
+    document.removeEventListener('itemInserted', onQueue);
+    document.addEventListener('itemInserted', onWatched);
     return;
   }
 
@@ -127,6 +130,9 @@ export async function onWatched(event) {
     pagination.setFunction(watchedMovies.getMovies, watchedMovies);
   }, 500);
   window.onresize = debouncedSetFunction;
+
+  document.removeEventListener('itemInserted', onQueue);
+  document.addEventListener('itemInserted', onWatched);
 }
 
 export async function onQueue(event) {
@@ -142,6 +148,9 @@ export async function onQueue(event) {
       if (!queueMovies.resize()) return;
       queueMovies.renderRecommended();
     }, 500);
+
+    document.addEventListener('itemInserted', onQueue);
+    document.removeEventListener('itemInserted', onWatched);
     return;
   }
 
@@ -154,6 +163,9 @@ export async function onQueue(event) {
     pagination.setFunction(queueMovies.getMovies, queueMovies);
   }, 500);
   window.onresize = debouncedSetFunction;
+
+  document.addEventListener('itemInserted', onQueue);
+  document.removeEventListener('itemInserted', onWatched);
 }
 
 // import './input-search';
