@@ -32,7 +32,7 @@ async function onFilmCardClick(e) {
    if (filmId) {
       /**  query for a single movie by id  */
 
-      filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
+      const filmData = await api.fetchMovieFullDetails(filmId); //@TODO: переделать на локал сторадж!!!
       GlodObj.movie = filmData; /////////
       GlodObj.id = filmId; /////////
 
