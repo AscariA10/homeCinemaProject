@@ -106,20 +106,16 @@ body {
     background: #FF6B01;
 }
 
+.recommended-films {
+    color: #000;
+}
+
 /*--- main-index-page ---*/
 .change-theme[data-theme="light"] {
     display: none;
 }
 
 .change-theme[data-theme="dark"] {
-    display: block;
-}
-
-.change-theme-library[data-theme="light"] {
-    display: none;
-}
-
-.change-theme-library[data-theme="dark"] {
     display: block;
 }
 }
