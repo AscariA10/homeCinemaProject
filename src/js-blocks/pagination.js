@@ -3,6 +3,7 @@ import { cardList } from './card-draw.js';
 import { LocalStorageEntry } from './localStorageEntry.js';
 const localStorageCurrentPage = new LocalStorageEntry('current_page_number');
 import { fetchTrendFilms } from './input-search.js';
+import { animScroll } from './anim-scroll.js';
 
 // To create a pagination you have to create an instance of class Pagination
 // and call setFunction method with relevant arguments
@@ -78,12 +79,12 @@ export default class Pagination {
     this.linkToIntance.pageNumber = this.page;
 
     this.res = await this.fn();
-    console.log(this.res);
 
     if (!this.res.length) fetchTrendFilms();
 
     this.totalPages = this.linkToIntance.totalPagesNumber;
     cardList(this.res);
+    animScroll();
 
     if (this.isPopularFilms) this.#putPageToLocalStorage(this.page);
 
