@@ -1,6 +1,6 @@
-// import { animScroll } from './anim-scroll.js';
-animScroll();
-//--------------------новий файл---anim-scroll.js
+// // import { animScroll } from './anim-scroll.js';
+// animScroll();
+// //--------------------новий файл---anim-scroll.js
 export function animScroll() {
    const animItems = document.querySelectorAll('._anim-items');
 
