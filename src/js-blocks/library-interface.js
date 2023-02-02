@@ -153,4 +153,9 @@ async function onQueue(event) {
    window.onresize = debouncedSetFunction;
 }
 
-import '../js-blocks/team-window';
+// import './input-search';
+// import './modal-window-render.js';
+
+// import './back-to-top-button';
+// import './theme';
+import './team-window';
