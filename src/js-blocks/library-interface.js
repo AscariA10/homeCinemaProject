@@ -161,3 +161,4 @@ async function onQueue(event) {
 import './team-window';
 import './theme';
 console.log('hello');
+console.log('hello');
