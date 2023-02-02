@@ -143,6 +143,7 @@ function openModal() {
    const modalImg = document.querySelector('.modal_without_close-btn .modal_img');
 
    closeModalBtnRef.addEventListener('click', onCloseModal);
+   modalImg.addEventListener('mouseover', onMouseOverModalImg);
    backdrop.addEventListener('click', onBackdropClick);
    window.addEventListener('keydown', onEscPress);
 
@@ -206,8 +207,6 @@ function queueAction() {
       BTN_ACTION_QUEUE = BTN_TITLE_ADD_TO_QUEUE;
       queueSpanEl.textContent = BTN_ACTION_QUEUE;
    }
-
-   modalImg.addEventListener('mouseover', onMouseOverModalImg);
 
    document.body.classList.add('show-modal');
 }
